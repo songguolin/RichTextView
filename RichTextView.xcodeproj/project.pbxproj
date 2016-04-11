@@ -1,0 +1,687 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DE70FDDC1C3E2FD900540EE7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FDDB1C3E2FD900540EE7 /* main.m */; };
+		DE70FDDF1C3E2FD900540EE7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FDDE1C3E2FD900540EE7 /* AppDelegate.m */; };
+		DE70FDE21C3E2FD900540EE7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FDE11C3E2FD900540EE7 /* ViewController.m */; };
+		DE70FDE51C3E2FD900540EE7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE70FDE31C3E2FD900540EE7 /* Main.storyboard */; };
+		DE70FDE71C3E2FD900540EE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE70FDE61C3E2FD900540EE7 /* Assets.xcassets */; };
+		DE70FDEA1C3E2FD900540EE7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE70FDE81C3E2FD900540EE7 /* LaunchScreen.storyboard */; };
+		DE70FDF51C3E2FD900540EE7 /* RichTextViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FDF41C3E2FD900540EE7 /* RichTextViewTests.m */; };
+		DE70FE001C3E2FD900540EE7 /* RichTextViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FDFF1C3E2FD900540EE7 /* RichTextViewUITests.m */; };
+		DE70FE141C3E30A400540EE7 /* ImageTextAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE131C3E30A400540EE7 /* ImageTextAttachment.m */; };
+		DE70FE171C3E311600540EE7 /* NSAttributedString+RichText.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE161C3E311600540EE7 /* NSAttributedString+RichText.m */; };
+		DE70FE1A1C3E330100540EE7 /* RichTextPreviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE191C3E330100540EE7 /* RichTextPreviewVC.m */; };
+		DE70FE1C1C3E331A00540EE7 /* RichText.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE70FE1B1C3E331A00540EE7 /* RichText.storyboard */; };
+		DE70FE221C3E366E00540EE7 /* RichTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE211C3E366E00540EE7 /* RichTextViewController.m */; };
+		DE70FE441C3E3B1700540EE7 /* TYAlertController+BlurEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE261C3E3B1700540EE7 /* TYAlertController+BlurEffects.m */; };
+		DE70FE451C3E3B1700540EE7 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE281C3E3B1700540EE7 /* UIImage+ImageEffects.m */; };
+		DE70FE461C3E3B1700540EE7 /* SettingModelView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE2B1C3E3B1700540EE7 /* SettingModelView.m */; };
+		DE70FE471C3E3B1700540EE7 /* SettingModelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE70FE2C1C3E3B1700540EE7 /* SettingModelView.xib */; };
+		DE70FE481C3E3B1700540EE7 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE2E1C3E3B1700540EE7 /* ShareView.m */; };
+		DE70FE491C3E3B1700540EE7 /* ShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE70FE2F1C3E3B1700540EE7 /* ShareView.xib */; };
+		DE70FE4A1C3E3B1700540EE7 /* TYAlertController+TransitionAnimate.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE311C3E3B1700540EE7 /* TYAlertController+TransitionAnimate.m */; };
+		DE70FE4B1C3E3B1700540EE7 /* TYAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE331C3E3B1700540EE7 /* TYAlertController.m */; };
+		DE70FE4C1C3E3B1700540EE7 /* TYAlertDropDownAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE351C3E3B1700540EE7 /* TYAlertDropDownAnimation.m */; };
+		DE70FE4D1C3E3B1700540EE7 /* TYAlertFadeAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE371C3E3B1700540EE7 /* TYAlertFadeAnimation.m */; };
+		DE70FE4E1C3E3B1700540EE7 /* TYAlertScaleFadeAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE391C3E3B1700540EE7 /* TYAlertScaleFadeAnimation.m */; };
+		DE70FE4F1C3E3B1700540EE7 /* TYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE3B1C3E3B1700540EE7 /* TYAlertView.m */; };
+		DE70FE501C3E3B1700540EE7 /* TYBaseAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE3D1C3E3B1700540EE7 /* TYBaseAnimation.m */; };
+		DE70FE511C3E3B1700540EE7 /* TYShowAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE3F1C3E3B1700540EE7 /* TYShowAlertView.m */; };
+		DE70FE521C3E3B1700540EE7 /* UIView+TYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE411C3E3B1700540EE7 /* UIView+TYAlertView.m */; };
+		DE70FE531C3E3B1700540EE7 /* UIView+TYAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE431C3E3B1700540EE7 /* UIView+TYAutoLayout.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DE70FDF11C3E2FD900540EE7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DE70FDCF1C3E2FD900540EE7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DE70FDD61C3E2FD900540EE7;
+			remoteInfo = RichTextView;
+		};
+		DE70FDFC1C3E2FD900540EE7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DE70FDCF1C3E2FD900540EE7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DE70FDD61C3E2FD900540EE7;
+			remoteInfo = RichTextView;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		DE70FDD71C3E2FD900540EE7 /* RichTextView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RichTextView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE70FDDB1C3E2FD900540EE7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DE70FDDD1C3E2FD900540EE7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		DE70FDDE1C3E2FD900540EE7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		DE70FDE01C3E2FD900540EE7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		DE70FDE11C3E2FD900540EE7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		DE70FDE41C3E2FD900540EE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DE70FDE61C3E2FD900540EE7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DE70FDE91C3E2FD900540EE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DE70FDEB1C3E2FD900540EE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DE70FDF01C3E2FD900540EE7 /* RichTextViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RichTextViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE70FDF41C3E2FD900540EE7 /* RichTextViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RichTextViewTests.m; sourceTree = "<group>"; };
+		DE70FDF61C3E2FD900540EE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DE70FDFB1C3E2FD900540EE7 /* RichTextViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RichTextViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE70FDFF1C3E2FD900540EE7 /* RichTextViewUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RichTextViewUITests.m; sourceTree = "<group>"; };
+		DE70FE011C3E2FD900540EE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DE70FE121C3E30A400540EE7 /* ImageTextAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTextAttachment.h; sourceTree = "<group>"; };
+		DE70FE131C3E30A400540EE7 /* ImageTextAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageTextAttachment.m; sourceTree = "<group>"; };
+		DE70FE151C3E311600540EE7 /* NSAttributedString+RichText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+RichText.h"; sourceTree = "<group>"; };
+		DE70FE161C3E311600540EE7 /* NSAttributedString+RichText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+RichText.m"; sourceTree = "<group>"; };
+		DE70FE181C3E330100540EE7 /* RichTextPreviewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RichTextPreviewVC.h; sourceTree = "<group>"; };
+		DE70FE191C3E330100540EE7 /* RichTextPreviewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RichTextPreviewVC.m; sourceTree = "<group>"; };
+		DE70FE1B1C3E331A00540EE7 /* RichText.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = RichText.storyboard; sourceTree = "<group>"; };
+		DE70FE201C3E366E00540EE7 /* RichTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RichTextViewController.h; sourceTree = "<group>"; };
+		DE70FE211C3E366E00540EE7 /* RichTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RichTextViewController.m; sourceTree = "<group>"; };
+		DE70FE251C3E3B1700540EE7 /* TYAlertController+BlurEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TYAlertController+BlurEffects.h"; sourceTree = "<group>"; };
+		DE70FE261C3E3B1700540EE7 /* TYAlertController+BlurEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TYAlertController+BlurEffects.m"; sourceTree = "<group>"; };
+		DE70FE271C3E3B1700540EE7 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		DE70FE281C3E3B1700540EE7 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		DE70FE2A1C3E3B1700540EE7 /* SettingModelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingModelView.h; sourceTree = "<group>"; };
+		DE70FE2B1C3E3B1700540EE7 /* SettingModelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingModelView.m; sourceTree = "<group>"; };
+		DE70FE2C1C3E3B1700540EE7 /* SettingModelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingModelView.xib; sourceTree = "<group>"; };
+		DE70FE2D1C3E3B1700540EE7 /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
+		DE70FE2E1C3E3B1700540EE7 /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
+		DE70FE2F1C3E3B1700540EE7 /* ShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareView.xib; sourceTree = "<group>"; };
+		DE70FE311C3E3B1700540EE7 /* TYAlertController+TransitionAnimate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TYAlertController+TransitionAnimate.m"; sourceTree = "<group>"; };
+		DE70FE321C3E3B1700540EE7 /* TYAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYAlertController.h; sourceTree = "<group>"; };
+		DE70FE331C3E3B1700540EE7 /* TYAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYAlertController.m; sourceTree = "<group>"; };
+		DE70FE341C3E3B1700540EE7 /* TYAlertDropDownAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYAlertDropDownAnimation.h; sourceTree = "<group>"; };
+		DE70FE351C3E3B1700540EE7 /* TYAlertDropDownAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYAlertDropDownAnimation.m; sourceTree = "<group>"; };
+		DE70FE361C3E3B1700540EE7 /* TYAlertFadeAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYAlertFadeAnimation.h; sourceTree = "<group>"; };
+		DE70FE371C3E3B1700540EE7 /* TYAlertFadeAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYAlertFadeAnimation.m; sourceTree = "<group>"; };
+		DE70FE381C3E3B1700540EE7 /* TYAlertScaleFadeAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYAlertScaleFadeAnimation.h; sourceTree = "<group>"; };
+		DE70FE391C3E3B1700540EE7 /* TYAlertScaleFadeAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYAlertScaleFadeAnimation.m; sourceTree = "<group>"; };
+		DE70FE3A1C3E3B1700540EE7 /* TYAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYAlertView.h; sourceTree = "<group>"; };
+		DE70FE3B1C3E3B1700540EE7 /* TYAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYAlertView.m; sourceTree = "<group>"; };
+		DE70FE3C1C3E3B1700540EE7 /* TYBaseAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYBaseAnimation.h; sourceTree = "<group>"; };
+		DE70FE3D1C3E3B1700540EE7 /* TYBaseAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYBaseAnimation.m; sourceTree = "<group>"; };
+		DE70FE3E1C3E3B1700540EE7 /* TYShowAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYShowAlertView.h; sourceTree = "<group>"; };
+		DE70FE3F1C3E3B1700540EE7 /* TYShowAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYShowAlertView.m; sourceTree = "<group>"; };
+		DE70FE401C3E3B1700540EE7 /* UIView+TYAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TYAlertView.h"; sourceTree = "<group>"; };
+		DE70FE411C3E3B1700540EE7 /* UIView+TYAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TYAlertView.m"; sourceTree = "<group>"; };
+		DE70FE421C3E3B1700540EE7 /* UIView+TYAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TYAutoLayout.h"; sourceTree = "<group>"; };
+		DE70FE431C3E3B1700540EE7 /* UIView+TYAutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TYAutoLayout.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DE70FDD41C3E2FD900540EE7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE70FDED1C3E2FD900540EE7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE70FDF81C3E2FD900540EE7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DE70FDCE1C3E2FD900540EE7 = {
+			isa = PBXGroup;
+			children = (
+				DE70FDD91C3E2FD900540EE7 /* RichTextView */,
+				DE70FDF31C3E2FD900540EE7 /* RichTextViewTests */,
+				DE70FDFE1C3E2FD900540EE7 /* RichTextViewUITests */,
+				DE70FDD81C3E2FD900540EE7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DE70FDD81C3E2FD900540EE7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DE70FDD71C3E2FD900540EE7 /* RichTextView.app */,
+				DE70FDF01C3E2FD900540EE7 /* RichTextViewTests.xctest */,
+				DE70FDFB1C3E2FD900540EE7 /* RichTextViewUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DE70FDD91C3E2FD900540EE7 /* RichTextView */ = {
+			isa = PBXGroup;
+			children = (
+				DE70FE0D1C3E301A00540EE7 /* RichVC */,
+				DE70FDDD1C3E2FD900540EE7 /* AppDelegate.h */,
+				DE70FDDE1C3E2FD900540EE7 /* AppDelegate.m */,
+				DE70FDE01C3E2FD900540EE7 /* ViewController.h */,
+				DE70FDE11C3E2FD900540EE7 /* ViewController.m */,
+				DE70FDE31C3E2FD900540EE7 /* Main.storyboard */,
+				DE70FDE61C3E2FD900540EE7 /* Assets.xcassets */,
+				DE70FDE81C3E2FD900540EE7 /* LaunchScreen.storyboard */,
+				DE70FDEB1C3E2FD900540EE7 /* Info.plist */,
+				DE70FDDA1C3E2FD900540EE7 /* Supporting Files */,
+			);
+			path = RichTextView;
+			sourceTree = "<group>";
+		};
+		DE70FDDA1C3E2FD900540EE7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DE70FDDB1C3E2FD900540EE7 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DE70FDF31C3E2FD900540EE7 /* RichTextViewTests */ = {
+			isa = PBXGroup;
+			children = (
+				DE70FDF41C3E2FD900540EE7 /* RichTextViewTests.m */,
+				DE70FDF61C3E2FD900540EE7 /* Info.plist */,
+			);
+			path = RichTextViewTests;
+			sourceTree = "<group>";
+		};
+		DE70FDFE1C3E2FD900540EE7 /* RichTextViewUITests */ = {
+			isa = PBXGroup;
+			children = (
+				DE70FDFF1C3E2FD900540EE7 /* RichTextViewUITests.m */,
+				DE70FE011C3E2FD900540EE7 /* Info.plist */,
+			);
+			path = RichTextViewUITests;
+			sourceTree = "<group>";
+		};
+		DE70FE0D1C3E301A00540EE7 /* RichVC */ = {
+			isa = PBXGroup;
+			children = (
+				DE70FE231C3E3B1700540EE7 /* AlertController */,
+				DE70FE0E1C3E303300540EE7 /* RichVCUtil */,
+				DE70FE201C3E366E00540EE7 /* RichTextViewController.h */,
+				DE70FE211C3E366E00540EE7 /* RichTextViewController.m */,
+				DE70FE181C3E330100540EE7 /* RichTextPreviewVC.h */,
+				DE70FE191C3E330100540EE7 /* RichTextPreviewVC.m */,
+				DE70FE1B1C3E331A00540EE7 /* RichText.storyboard */,
+			);
+			path = RichVC;
+			sourceTree = "<group>";
+		};
+		DE70FE0E1C3E303300540EE7 /* RichVCUtil */ = {
+			isa = PBXGroup;
+			children = (
+				DE70FE121C3E30A400540EE7 /* ImageTextAttachment.h */,
+				DE70FE131C3E30A400540EE7 /* ImageTextAttachment.m */,
+				DE70FE151C3E311600540EE7 /* NSAttributedString+RichText.h */,
+				DE70FE161C3E311600540EE7 /* NSAttributedString+RichText.m */,
+			);
+			path = RichVCUtil;
+			sourceTree = "<group>";
+		};
+		DE70FE231C3E3B1700540EE7 /* AlertController */ = {
+			isa = PBXGroup;
+			children = (
+				DE70FE241C3E3B1700540EE7 /* Blur Effects */,
+				DE70FE291C3E3B1700540EE7 /* customView */,
+				DE70FE301C3E3B1700540EE7 /* TYAlertController */,
+			);
+			path = AlertController;
+			sourceTree = "<group>";
+		};
+		DE70FE241C3E3B1700540EE7 /* Blur Effects */ = {
+			isa = PBXGroup;
+			children = (
+				DE70FE251C3E3B1700540EE7 /* TYAlertController+BlurEffects.h */,
+				DE70FE261C3E3B1700540EE7 /* TYAlertController+BlurEffects.m */,
+				DE70FE271C3E3B1700540EE7 /* UIImage+ImageEffects.h */,
+				DE70FE281C3E3B1700540EE7 /* UIImage+ImageEffects.m */,
+			);
+			path = "Blur Effects";
+			sourceTree = "<group>";
+		};
+		DE70FE291C3E3B1700540EE7 /* customView */ = {
+			isa = PBXGroup;
+			children = (
+				DE70FE2A1C3E3B1700540EE7 /* SettingModelView.h */,
+				DE70FE2B1C3E3B1700540EE7 /* SettingModelView.m */,
+				DE70FE2C1C3E3B1700540EE7 /* SettingModelView.xib */,
+				DE70FE2D1C3E3B1700540EE7 /* ShareView.h */,
+				DE70FE2E1C3E3B1700540EE7 /* ShareView.m */,
+				DE70FE2F1C3E3B1700540EE7 /* ShareView.xib */,
+			);
+			path = customView;
+			sourceTree = "<group>";
+		};
+		DE70FE301C3E3B1700540EE7 /* TYAlertController */ = {
+			isa = PBXGroup;
+			children = (
+				DE70FE311C3E3B1700540EE7 /* TYAlertController+TransitionAnimate.m */,
+				DE70FE321C3E3B1700540EE7 /* TYAlertController.h */,
+				DE70FE331C3E3B1700540EE7 /* TYAlertController.m */,
+				DE70FE341C3E3B1700540EE7 /* TYAlertDropDownAnimation.h */,
+				DE70FE351C3E3B1700540EE7 /* TYAlertDropDownAnimation.m */,
+				DE70FE361C3E3B1700540EE7 /* TYAlertFadeAnimation.h */,
+				DE70FE371C3E3B1700540EE7 /* TYAlertFadeAnimation.m */,
+				DE70FE381C3E3B1700540EE7 /* TYAlertScaleFadeAnimation.h */,
+				DE70FE391C3E3B1700540EE7 /* TYAlertScaleFadeAnimation.m */,
+				DE70FE3A1C3E3B1700540EE7 /* TYAlertView.h */,
+				DE70FE3B1C3E3B1700540EE7 /* TYAlertView.m */,
+				DE70FE3C1C3E3B1700540EE7 /* TYBaseAnimation.h */,
+				DE70FE3D1C3E3B1700540EE7 /* TYBaseAnimation.m */,
+				DE70FE3E1C3E3B1700540EE7 /* TYShowAlertView.h */,
+				DE70FE3F1C3E3B1700540EE7 /* TYShowAlertView.m */,
+				DE70FE401C3E3B1700540EE7 /* UIView+TYAlertView.h */,
+				DE70FE411C3E3B1700540EE7 /* UIView+TYAlertView.m */,
+				DE70FE421C3E3B1700540EE7 /* UIView+TYAutoLayout.h */,
+				DE70FE431C3E3B1700540EE7 /* UIView+TYAutoLayout.m */,
+			);
+			path = TYAlertController;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DE70FDD61C3E2FD900540EE7 /* RichTextView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DE70FE041C3E2FD900540EE7 /* Build configuration list for PBXNativeTarget "RichTextView" */;
+			buildPhases = (
+				DE70FDD31C3E2FD900540EE7 /* Sources */,
+				DE70FDD41C3E2FD900540EE7 /* Frameworks */,
+				DE70FDD51C3E2FD900540EE7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RichTextView;
+			productName = RichTextView;
+			productReference = DE70FDD71C3E2FD900540EE7 /* RichTextView.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DE70FDEF1C3E2FD900540EE7 /* RichTextViewTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DE70FE071C3E2FD900540EE7 /* Build configuration list for PBXNativeTarget "RichTextViewTests" */;
+			buildPhases = (
+				DE70FDEC1C3E2FD900540EE7 /* Sources */,
+				DE70FDED1C3E2FD900540EE7 /* Frameworks */,
+				DE70FDEE1C3E2FD900540EE7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DE70FDF21C3E2FD900540EE7 /* PBXTargetDependency */,
+			);
+			name = RichTextViewTests;
+			productName = RichTextViewTests;
+			productReference = DE70FDF01C3E2FD900540EE7 /* RichTextViewTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DE70FDFA1C3E2FD900540EE7 /* RichTextViewUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DE70FE0A1C3E2FD900540EE7 /* Build configuration list for PBXNativeTarget "RichTextViewUITests" */;
+			buildPhases = (
+				DE70FDF71C3E2FD900540EE7 /* Sources */,
+				DE70FDF81C3E2FD900540EE7 /* Frameworks */,
+				DE70FDF91C3E2FD900540EE7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DE70FDFD1C3E2FD900540EE7 /* PBXTargetDependency */,
+			);
+			name = RichTextViewUITests;
+			productName = RichTextViewUITests;
+			productReference = DE70FDFB1C3E2FD900540EE7 /* RichTextViewUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DE70FDCF1C3E2FD900540EE7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "innos-campus";
+				TargetAttributes = {
+					DE70FDD61C3E2FD900540EE7 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					DE70FDEF1C3E2FD900540EE7 = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = DE70FDD61C3E2FD900540EE7;
+					};
+					DE70FDFA1C3E2FD900540EE7 = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = DE70FDD61C3E2FD900540EE7;
+					};
+				};
+			};
+			buildConfigurationList = DE70FDD21C3E2FD900540EE7 /* Build configuration list for PBXProject "RichTextView" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DE70FDCE1C3E2FD900540EE7;
+			productRefGroup = DE70FDD81C3E2FD900540EE7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DE70FDD61C3E2FD900540EE7 /* RichTextView */,
+				DE70FDEF1C3E2FD900540EE7 /* RichTextViewTests */,
+				DE70FDFA1C3E2FD900540EE7 /* RichTextViewUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DE70FDD51C3E2FD900540EE7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE70FDEA1C3E2FD900540EE7 /* LaunchScreen.storyboard in Resources */,
+				DE70FE1C1C3E331A00540EE7 /* RichText.storyboard in Resources */,
+				DE70FE491C3E3B1700540EE7 /* ShareView.xib in Resources */,
+				DE70FDE71C3E2FD900540EE7 /* Assets.xcassets in Resources */,
+				DE70FE471C3E3B1700540EE7 /* SettingModelView.xib in Resources */,
+				DE70FDE51C3E2FD900540EE7 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE70FDEE1C3E2FD900540EE7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE70FDF91C3E2FD900540EE7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DE70FDD31C3E2FD900540EE7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE70FE501C3E3B1700540EE7 /* TYBaseAnimation.m in Sources */,
+				DE70FE1A1C3E330100540EE7 /* RichTextPreviewVC.m in Sources */,
+				DE70FE531C3E3B1700540EE7 /* UIView+TYAutoLayout.m in Sources */,
+				DE70FDE21C3E2FD900540EE7 /* ViewController.m in Sources */,
+				DE70FE4D1C3E3B1700540EE7 /* TYAlertFadeAnimation.m in Sources */,
+				DE70FE4E1C3E3B1700540EE7 /* TYAlertScaleFadeAnimation.m in Sources */,
+				DE70FE4A1C3E3B1700540EE7 /* TYAlertController+TransitionAnimate.m in Sources */,
+				DE70FE171C3E311600540EE7 /* NSAttributedString+RichText.m in Sources */,
+				DE70FE481C3E3B1700540EE7 /* ShareView.m in Sources */,
+				DE70FE4C1C3E3B1700540EE7 /* TYAlertDropDownAnimation.m in Sources */,
+				DE70FE441C3E3B1700540EE7 /* TYAlertController+BlurEffects.m in Sources */,
+				DE70FDDF1C3E2FD900540EE7 /* AppDelegate.m in Sources */,
+				DE70FE521C3E3B1700540EE7 /* UIView+TYAlertView.m in Sources */,
+				DE70FE4B1C3E3B1700540EE7 /* TYAlertController.m in Sources */,
+				DE70FE451C3E3B1700540EE7 /* UIImage+ImageEffects.m in Sources */,
+				DE70FE511C3E3B1700540EE7 /* TYShowAlertView.m in Sources */,
+				DE70FE141C3E30A400540EE7 /* ImageTextAttachment.m in Sources */,
+				DE70FE4F1C3E3B1700540EE7 /* TYAlertView.m in Sources */,
+				DE70FE221C3E366E00540EE7 /* RichTextViewController.m in Sources */,
+				DE70FDDC1C3E2FD900540EE7 /* main.m in Sources */,
+				DE70FE461C3E3B1700540EE7 /* SettingModelView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE70FDEC1C3E2FD900540EE7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE70FDF51C3E2FD900540EE7 /* RichTextViewTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE70FDF71C3E2FD900540EE7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE70FE001C3E2FD900540EE7 /* RichTextViewUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DE70FDF21C3E2FD900540EE7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DE70FDD61C3E2FD900540EE7 /* RichTextView */;
+			targetProxy = DE70FDF11C3E2FD900540EE7 /* PBXContainerItemProxy */;
+		};
+		DE70FDFD1C3E2FD900540EE7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DE70FDD61C3E2FD900540EE7 /* RichTextView */;
+			targetProxy = DE70FDFC1C3E2FD900540EE7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DE70FDE31C3E2FD900540EE7 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DE70FDE41C3E2FD900540EE7 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		DE70FDE81C3E2FD900540EE7 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DE70FDE91C3E2FD900540EE7 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DE70FE021C3E2FD900540EE7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DE70FE031C3E2FD900540EE7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DE70FE051C3E2FD900540EE7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = RichTextView/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = innos.RichTextView;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DE70FE061C3E2FD900540EE7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = RichTextView/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = innos.RichTextView;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		DE70FE081C3E2FD900540EE7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = RichTextViewTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = innos.RichTextViewTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RichTextView.app/RichTextView";
+			};
+			name = Debug;
+		};
+		DE70FE091C3E2FD900540EE7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = RichTextViewTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = innos.RichTextViewTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RichTextView.app/RichTextView";
+			};
+			name = Release;
+		};
+		DE70FE0B1C3E2FD900540EE7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = RichTextViewUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = innos.RichTextViewUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = RichTextView;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		DE70FE0C1C3E2FD900540EE7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = RichTextViewUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = innos.RichTextViewUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = RichTextView;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DE70FDD21C3E2FD900540EE7 /* Build configuration list for PBXProject "RichTextView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE70FE021C3E2FD900540EE7 /* Debug */,
+				DE70FE031C3E2FD900540EE7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DE70FE041C3E2FD900540EE7 /* Build configuration list for PBXNativeTarget "RichTextView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE70FE051C3E2FD900540EE7 /* Debug */,
+				DE70FE061C3E2FD900540EE7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		DE70FE071C3E2FD900540EE7 /* Build configuration list for PBXNativeTarget "RichTextViewTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE70FE081C3E2FD900540EE7 /* Debug */,
+				DE70FE091C3E2FD900540EE7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		DE70FE0A1C3E2FD900540EE7 /* Build configuration list for PBXNativeTarget "RichTextViewUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE70FE0B1C3E2FD900540EE7 /* Debug */,
+				DE70FE0C1C3E2FD900540EE7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DE70FDCF1C3E2FD900540EE7 /* Project object */;
+}
