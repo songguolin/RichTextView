@@ -7,13 +7,13 @@
 //
 
 #import "RichTextViewController.h"
-#import "RichTextPreviewVC.h"
+
 
 
 #import "ImageTextAttachment.h"
 #import "NSAttributedString+RichText.h"
-
-#import "UIView+TYAlertView.h"
+#import "PictureModel.h"
+#import "NSAttributedString+html.h"
 
 //Image default max size
 #define IMAGE_MAX_SIZE ([UIScreen mainScreen].bounds.size.width-10)
@@ -72,15 +72,27 @@
     //Init text font
     
     [self resetTextStyle];
-    
-    
-    
-    
-    
+
     //Add keyboard notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardNotification:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardNotification:) name:UIKeyboardWillShowNotification object:nil];
+    
+    
+    UIBarButtonItem * backItem=[[UIBarButtonItem alloc]initWithTitle:@"back" style:UIBarButtonItemStylePlain target:self action:@selector(backClick)];
+    
+    self.navigationItem.leftBarButtonItem=backItem;
 }
+
+//返回保存数据
+-(void)backClick
+{
+    [self finishClick:nil];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -217,19 +229,19 @@
 -(void)textViewDidChange:(UITextView *)textView
 {
     NSInteger len=textView.attributedText.length-self.locationStr.length;
-    NSLog(@"len--%d",len);
+
     
     if (len>0) {
        
         self.isDelete=NO;
         self.newRange=NSMakeRange(self.textView.selectedRange.location-len, len);
         self.newstr=[textView.text substringWithRange:self.newRange];
-        NSLog(@"最新--%@",self.newstr);
+ 
     }
     else
     {
         self.isDelete=YES;
-         NSLog(@"回删");
+
     }
    
     
@@ -299,51 +311,55 @@
 #pragma mark - Action
 //完成
 - (IBAction)finishClick:(UIButton *)sender {
-//    NSLog(@"text--%@",self.textView.text);
+
+    //注意这下面的三种 数据
 //    NSLog(@"textStorage。getPlainString--%@",[_textView.textStorage getPlainString]);
 //    NSLog(@"attributedText。getPlainString--%@",[_textView.attributedText getPlainString]);
 //    NSLog(@"attributedText--%@",self.textView.attributedText);
-    
-
-    if (self.finished!=nil) {
-        self.finished([_textView.attributedText getArrayWithAttributed]);
-        
+    if (self.feedbackHtml) {
+        if ([self.RTDelegate respondsToSelector:@selector(uploadImageArray:withCompletion:)]) {
+            //实现上传图片的代理，用url替换图片标识
+            
+            __weak typeof(self) weakself=self;
+            
+            [self.RTDelegate uploadImageArray:[_textView.attributedText getImgaeArray] withCompletion:^NSString *(NSArray *urlArray) {
+                 return  [weakself replacetagWithImageArray:urlArray];
+            }];
+        }
     }
+    else
+    {
+
+        //这个是返回数组，每个数组装有不同设置的字符串
+        if (self.finished!=nil) {
+            self.finished([_textView.attributedText getArrayWithAttributed]);
+            
+        }
+ 
+    }
+    
 }
 //颜色设置
 - (IBAction)colorClick:(UIButton *)sender {
     
-//    sender.selected=!sender.selected;
-//    if (sender.selected) {
-//        self.fontColor=[UIColor redColor];
-//        
-//    }
-//    else
-//    {
-//        
-//        self.fontColor=[UIColor blackColor];
-//    }
-//    
-//    [sender setTintColor:self.fontColor];
-//    
-//    
-//    //设置字的设置
-//    [self setInitLocation];
-    
-    NSString * aTaStr=@"@李明博";
-    
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.lineSpacing = self.lineSapce;// 字体的行间距
-    NSDictionary *attributes=@{
-                       NSFontAttributeName:[UIFont boldSystemFontOfSize:16],
-                       NSForegroundColorAttributeName:[UIColor blueColor],
-                       NSParagraphStyleAttributeName:paragraphStyle
-                       };
+    sender.selected=!sender.selected;
+    if (sender.selected) {
+        self.fontColor=[UIColor redColor];
         
-      NSAttributedString * insertStr=[[NSAttributedString alloc] initWithString:aTaStr attributes:attributes];
-    [self.locationStr insertAttributedString:insertStr atIndex:self.textView.selectedRange.location];
+    }
+    else
+    {
+        
+        self.fontColor=[UIColor blackColor];
+    }
     
-    _textView.attributedText =self.locationStr;
+    [sender setTintColor:self.fontColor];
+    
+    
+    //设置字的设置
+    [self setInitLocation];
+    
+
     
     
     
@@ -388,21 +404,19 @@
 - (IBAction)imageClick:(UIButton *)sender {
     [self.view endEditing:YES];
     
+
     
-    TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"选择照片" message:@""];
     
-    __weak typeof(self)weakSelf=self;
-    [alertView addAction:[TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancle handler:^(TYAlertAction *action) {
-        
-    }]];
-    
-    [alertView addAction:[TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDestructive handler:^(TYAlertAction *action) {
+    __weak typeof(self) weakSelf=self;
+    UIAlertController * alertVC=[UIAlertController alertControllerWithTitle:@"选择照片" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [weakSelf selectedImage];
     }]];
-    
-    // first way to show ,use UIView Category
-    [alertView showInWindowWithOriginY:200 backgoundTapDismissEnable:YES];
-    
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]];
+
+    [self presentViewController:alertVC animated:YES completion:nil];
     
     
 }
@@ -426,6 +440,8 @@
 #pragma mark - image picker delegte
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    
+    [self appenReturn];
     [picker dismissViewControllerAnimated:YES completion:^{}];
     
     UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
@@ -464,6 +480,8 @@
     //设置字的设置
     [self setInitLocation];
     
+    [self appenReturn];
+    
 }
 
 - (UIImage *)compressImage:(UIImage *)image toMaxFileSize:(NSInteger)maxFileSize {
@@ -477,6 +495,15 @@
     
     UIImage *compressedImage = [UIImage imageWithData:imageData];
     return compressedImage;
+}
+
+-(void)appenReturn
+{
+    NSAttributedString * returnStr=[[NSAttributedString alloc]initWithString:@"\n"];
+    NSMutableAttributedString * att=[[NSMutableAttributedString alloc]initWithAttributedString:_textView.attributedText];
+    [att appendAttributedString:returnStr];
+    
+    _textView.attributedText=att;
 }
 #pragma mark - Keyboard notification
 
@@ -498,11 +525,74 @@
 
 
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//这里就开始上传图片，拼接图片地址
+-(NSString *)replacetagWithImageArray:(NSArray *)picArr
 {
-    RichTextPreviewVC * sub=[segue destinationViewController];
-    if ([sub isKindOfClass:[RichTextPreviewVC class]]) {
-        sub.content=self.textView.attributedText;
+
+//    NSMutableAttributedString * contentStr=[[NSMutableAttributedString alloc]initWithAttributedString:_textView.attributedText];
+//    NSInteger count=0;
+//    [contentStr enumerateAttribute:NSAttachmentAttributeName inRange:NSMakeRange(0, contentStr.length)
+//                     options:0
+//                  usingBlock:^(id value, NSRange range, BOOL *stop) {
+//                      if (value && [value isKindOfClass:[ImageTextAttachment class]]) {
+//                  
+//                          if (count<picArr.count) {
+//                              PictureModel *picture=[picArr objectAtIndex:count];
+//                              NSString * imgTag=[NSString stringWithFormat:@"<img src=\"%@\" w=\"%lu\" h=\"%lu\"/>",picture.imageurl,(unsigned long)picture.width,(unsigned long)picture.height];
+////                              imgTag = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)imgTag, nil, nil, kCFStringEncodingUTF8));
+//                              
+////                             imgTag = [imgTag stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//                              [contentStr replaceCharactersInRange:range withString:imgTag];
+//                          }
+//                          else
+//                          {
+//                              *stop=YES;
+//                          }
+//                          
+//                      }
+//                  }];
+//
+//    
+//    return [contentStr toHtmlString];
+    
+    
+    NSMutableAttributedString * contentStr=[[NSMutableAttributedString alloc]initWithAttributedString:_textView.attributedText];
+
+    [contentStr enumerateAttribute:NSAttachmentAttributeName inRange:NSMakeRange(0, contentStr.length)
+                           options:0
+                        usingBlock:^(id value, NSRange range, BOOL *stop) {
+                            if (value && [value isKindOfClass:[ImageTextAttachment class]]) {
+
+                                [contentStr replaceCharactersInRange:range withString:ImageTag];
+
+                            }
+                        }];
+    
+
+    NSMutableString * mutableStr=[[NSMutableString alloc]initWithString:[contentStr toHtmlString]];
+    
+    //这里是把字符串分割成数组，
+    NSArray * strArr=[mutableStr  componentsSeparatedByString:ImageTag];
+
+
+    NSString * newContent=@"";
+    for (int i=0; i<strArr.count; i++) {
+        PictureModel * picture=nil;
+        NSString * imgTag=@"";
+        if (i<picArr.count) {
+            picture=[picArr objectAtIndex:i];
+            imgTag=[NSString stringWithFormat:@"<img src=\"%@\" w=\"%lu\" h=\"%lu\"/>",picture.imageurl,(unsigned long)picture.width,(unsigned long)picture.height];
+        }
+
+        
+        
+        //因为cutstr 可能是null
+        NSString * cutStr=[strArr objectAtIndex:i];
+        newContent=[NSString stringWithFormat:@"%@%@%@",newContent,cutStr,imgTag];
+        
     }
+    
+    return newContent;
+
 }
 @end

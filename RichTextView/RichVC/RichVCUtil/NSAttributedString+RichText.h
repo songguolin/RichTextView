@@ -9,8 +9,15 @@
 #import <Foundation/Foundation.h>
 
 @interface NSAttributedString (RichText)
-//返回带有图片标示的字符串
+/**
+ *  获取带有图片标示的一个普通字符串
+ *
+ *  @return NSString
+ */
 - (NSString *)getPlainString;
+
+//返回一个图片数组
+-(NSArray *)getImgaeArray;
 
 //返回数组，每个数组是一种属性和对应的内容
 -(NSMutableArray *)getArrayWithAttributed;

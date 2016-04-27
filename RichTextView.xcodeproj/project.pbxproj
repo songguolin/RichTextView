@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE6D51C91CCF4B43006B0E9B /* NSAttributedString+html.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6D51C81CCF4B43006B0E9B /* NSAttributedString+html.m */; };
+		DE6D51CC1CCF5533006B0E9B /* PictureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6D51CB1CCF5533006B0E9B /* PictureModel.m */; };
 		DE70FDDC1C3E2FD900540EE7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FDDB1C3E2FD900540EE7 /* main.m */; };
 		DE70FDDF1C3E2FD900540EE7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FDDE1C3E2FD900540EE7 /* AppDelegate.m */; };
 		DE70FDE21C3E2FD900540EE7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FDE11C3E2FD900540EE7 /* ViewController.m */; };
@@ -17,25 +19,8 @@
 		DE70FE001C3E2FD900540EE7 /* RichTextViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FDFF1C3E2FD900540EE7 /* RichTextViewUITests.m */; };
 		DE70FE141C3E30A400540EE7 /* ImageTextAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE131C3E30A400540EE7 /* ImageTextAttachment.m */; };
 		DE70FE171C3E311600540EE7 /* NSAttributedString+RichText.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE161C3E311600540EE7 /* NSAttributedString+RichText.m */; };
-		DE70FE1A1C3E330100540EE7 /* RichTextPreviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE191C3E330100540EE7 /* RichTextPreviewVC.m */; };
 		DE70FE1C1C3E331A00540EE7 /* RichText.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE70FE1B1C3E331A00540EE7 /* RichText.storyboard */; };
 		DE70FE221C3E366E00540EE7 /* RichTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE211C3E366E00540EE7 /* RichTextViewController.m */; };
-		DE70FE441C3E3B1700540EE7 /* TYAlertController+BlurEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE261C3E3B1700540EE7 /* TYAlertController+BlurEffects.m */; };
-		DE70FE451C3E3B1700540EE7 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE281C3E3B1700540EE7 /* UIImage+ImageEffects.m */; };
-		DE70FE461C3E3B1700540EE7 /* SettingModelView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE2B1C3E3B1700540EE7 /* SettingModelView.m */; };
-		DE70FE471C3E3B1700540EE7 /* SettingModelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE70FE2C1C3E3B1700540EE7 /* SettingModelView.xib */; };
-		DE70FE481C3E3B1700540EE7 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE2E1C3E3B1700540EE7 /* ShareView.m */; };
-		DE70FE491C3E3B1700540EE7 /* ShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE70FE2F1C3E3B1700540EE7 /* ShareView.xib */; };
-		DE70FE4A1C3E3B1700540EE7 /* TYAlertController+TransitionAnimate.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE311C3E3B1700540EE7 /* TYAlertController+TransitionAnimate.m */; };
-		DE70FE4B1C3E3B1700540EE7 /* TYAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE331C3E3B1700540EE7 /* TYAlertController.m */; };
-		DE70FE4C1C3E3B1700540EE7 /* TYAlertDropDownAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE351C3E3B1700540EE7 /* TYAlertDropDownAnimation.m */; };
-		DE70FE4D1C3E3B1700540EE7 /* TYAlertFadeAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE371C3E3B1700540EE7 /* TYAlertFadeAnimation.m */; };
-		DE70FE4E1C3E3B1700540EE7 /* TYAlertScaleFadeAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE391C3E3B1700540EE7 /* TYAlertScaleFadeAnimation.m */; };
-		DE70FE4F1C3E3B1700540EE7 /* TYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE3B1C3E3B1700540EE7 /* TYAlertView.m */; };
-		DE70FE501C3E3B1700540EE7 /* TYBaseAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE3D1C3E3B1700540EE7 /* TYBaseAnimation.m */; };
-		DE70FE511C3E3B1700540EE7 /* TYShowAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE3F1C3E3B1700540EE7 /* TYShowAlertView.m */; };
-		DE70FE521C3E3B1700540EE7 /* UIView+TYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE411C3E3B1700540EE7 /* UIView+TYAlertView.m */; };
-		DE70FE531C3E3B1700540EE7 /* UIView+TYAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE431C3E3B1700540EE7 /* UIView+TYAutoLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +41,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DE6D51C71CCF4B43006B0E9B /* NSAttributedString+html.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+html.h"; sourceTree = "<group>"; };
+		DE6D51C81CCF4B43006B0E9B /* NSAttributedString+html.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+html.m"; sourceTree = "<group>"; };
+		DE6D51CA1CCF5533006B0E9B /* PictureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureModel.h; sourceTree = "<group>"; };
+		DE6D51CB1CCF5533006B0E9B /* PictureModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureModel.m; sourceTree = "<group>"; };
 		DE70FDD71C3E2FD900540EE7 /* RichTextView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RichTextView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE70FDDB1C3E2FD900540EE7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DE70FDDD1C3E2FD900540EE7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -76,40 +65,9 @@
 		DE70FE131C3E30A400540EE7 /* ImageTextAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageTextAttachment.m; sourceTree = "<group>"; };
 		DE70FE151C3E311600540EE7 /* NSAttributedString+RichText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+RichText.h"; sourceTree = "<group>"; };
 		DE70FE161C3E311600540EE7 /* NSAttributedString+RichText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+RichText.m"; sourceTree = "<group>"; };
-		DE70FE181C3E330100540EE7 /* RichTextPreviewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RichTextPreviewVC.h; sourceTree = "<group>"; };
-		DE70FE191C3E330100540EE7 /* RichTextPreviewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RichTextPreviewVC.m; sourceTree = "<group>"; };
 		DE70FE1B1C3E331A00540EE7 /* RichText.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = RichText.storyboard; sourceTree = "<group>"; };
 		DE70FE201C3E366E00540EE7 /* RichTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RichTextViewController.h; sourceTree = "<group>"; };
 		DE70FE211C3E366E00540EE7 /* RichTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RichTextViewController.m; sourceTree = "<group>"; };
-		DE70FE251C3E3B1700540EE7 /* TYAlertController+BlurEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TYAlertController+BlurEffects.h"; sourceTree = "<group>"; };
-		DE70FE261C3E3B1700540EE7 /* TYAlertController+BlurEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TYAlertController+BlurEffects.m"; sourceTree = "<group>"; };
-		DE70FE271C3E3B1700540EE7 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
-		DE70FE281C3E3B1700540EE7 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
-		DE70FE2A1C3E3B1700540EE7 /* SettingModelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingModelView.h; sourceTree = "<group>"; };
-		DE70FE2B1C3E3B1700540EE7 /* SettingModelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingModelView.m; sourceTree = "<group>"; };
-		DE70FE2C1C3E3B1700540EE7 /* SettingModelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingModelView.xib; sourceTree = "<group>"; };
-		DE70FE2D1C3E3B1700540EE7 /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
-		DE70FE2E1C3E3B1700540EE7 /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
-		DE70FE2F1C3E3B1700540EE7 /* ShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareView.xib; sourceTree = "<group>"; };
-		DE70FE311C3E3B1700540EE7 /* TYAlertController+TransitionAnimate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TYAlertController+TransitionAnimate.m"; sourceTree = "<group>"; };
-		DE70FE321C3E3B1700540EE7 /* TYAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYAlertController.h; sourceTree = "<group>"; };
-		DE70FE331C3E3B1700540EE7 /* TYAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYAlertController.m; sourceTree = "<group>"; };
-		DE70FE341C3E3B1700540EE7 /* TYAlertDropDownAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYAlertDropDownAnimation.h; sourceTree = "<group>"; };
-		DE70FE351C3E3B1700540EE7 /* TYAlertDropDownAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYAlertDropDownAnimation.m; sourceTree = "<group>"; };
-		DE70FE361C3E3B1700540EE7 /* TYAlertFadeAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYAlertFadeAnimation.h; sourceTree = "<group>"; };
-		DE70FE371C3E3B1700540EE7 /* TYAlertFadeAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYAlertFadeAnimation.m; sourceTree = "<group>"; };
-		DE70FE381C3E3B1700540EE7 /* TYAlertScaleFadeAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYAlertScaleFadeAnimation.h; sourceTree = "<group>"; };
-		DE70FE391C3E3B1700540EE7 /* TYAlertScaleFadeAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYAlertScaleFadeAnimation.m; sourceTree = "<group>"; };
-		DE70FE3A1C3E3B1700540EE7 /* TYAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYAlertView.h; sourceTree = "<group>"; };
-		DE70FE3B1C3E3B1700540EE7 /* TYAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYAlertView.m; sourceTree = "<group>"; };
-		DE70FE3C1C3E3B1700540EE7 /* TYBaseAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYBaseAnimation.h; sourceTree = "<group>"; };
-		DE70FE3D1C3E3B1700540EE7 /* TYBaseAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYBaseAnimation.m; sourceTree = "<group>"; };
-		DE70FE3E1C3E3B1700540EE7 /* TYShowAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYShowAlertView.h; sourceTree = "<group>"; };
-		DE70FE3F1C3E3B1700540EE7 /* TYShowAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYShowAlertView.m; sourceTree = "<group>"; };
-		DE70FE401C3E3B1700540EE7 /* UIView+TYAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TYAlertView.h"; sourceTree = "<group>"; };
-		DE70FE411C3E3B1700540EE7 /* UIView+TYAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TYAlertView.m"; sourceTree = "<group>"; };
-		DE70FE421C3E3B1700540EE7 /* UIView+TYAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TYAutoLayout.h"; sourceTree = "<group>"; };
-		DE70FE431C3E3B1700540EE7 /* UIView+TYAutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TYAutoLayout.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +95,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DE6D51CD1CCF5812006B0E9B /* model */ = {
+			isa = PBXGroup;
+			children = (
+				DE6D51CA1CCF5533006B0E9B /* PictureModel.h */,
+				DE6D51CB1CCF5533006B0E9B /* PictureModel.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
 		DE70FDCE1C3E2FD900540EE7 = {
 			isa = PBXGroup;
 			children = (
@@ -203,12 +170,9 @@
 		DE70FE0D1C3E301A00540EE7 /* RichVC */ = {
 			isa = PBXGroup;
 			children = (
-				DE70FE231C3E3B1700540EE7 /* AlertController */,
 				DE70FE0E1C3E303300540EE7 /* RichVCUtil */,
 				DE70FE201C3E366E00540EE7 /* RichTextViewController.h */,
 				DE70FE211C3E366E00540EE7 /* RichTextViewController.m */,
-				DE70FE181C3E330100540EE7 /* RichTextPreviewVC.h */,
-				DE70FE191C3E330100540EE7 /* RichTextPreviewVC.m */,
 				DE70FE1B1C3E331A00540EE7 /* RichText.storyboard */,
 			);
 			path = RichVC;
@@ -217,72 +181,15 @@
 		DE70FE0E1C3E303300540EE7 /* RichVCUtil */ = {
 			isa = PBXGroup;
 			children = (
+				DE6D51CD1CCF5812006B0E9B /* model */,
+				DE6D51C71CCF4B43006B0E9B /* NSAttributedString+html.h */,
+				DE6D51C81CCF4B43006B0E9B /* NSAttributedString+html.m */,
 				DE70FE121C3E30A400540EE7 /* ImageTextAttachment.h */,
 				DE70FE131C3E30A400540EE7 /* ImageTextAttachment.m */,
 				DE70FE151C3E311600540EE7 /* NSAttributedString+RichText.h */,
 				DE70FE161C3E311600540EE7 /* NSAttributedString+RichText.m */,
 			);
 			path = RichVCUtil;
-			sourceTree = "<group>";
-		};
-		DE70FE231C3E3B1700540EE7 /* AlertController */ = {
-			isa = PBXGroup;
-			children = (
-				DE70FE241C3E3B1700540EE7 /* Blur Effects */,
-				DE70FE291C3E3B1700540EE7 /* customView */,
-				DE70FE301C3E3B1700540EE7 /* TYAlertController */,
-			);
-			path = AlertController;
-			sourceTree = "<group>";
-		};
-		DE70FE241C3E3B1700540EE7 /* Blur Effects */ = {
-			isa = PBXGroup;
-			children = (
-				DE70FE251C3E3B1700540EE7 /* TYAlertController+BlurEffects.h */,
-				DE70FE261C3E3B1700540EE7 /* TYAlertController+BlurEffects.m */,
-				DE70FE271C3E3B1700540EE7 /* UIImage+ImageEffects.h */,
-				DE70FE281C3E3B1700540EE7 /* UIImage+ImageEffects.m */,
-			);
-			path = "Blur Effects";
-			sourceTree = "<group>";
-		};
-		DE70FE291C3E3B1700540EE7 /* customView */ = {
-			isa = PBXGroup;
-			children = (
-				DE70FE2A1C3E3B1700540EE7 /* SettingModelView.h */,
-				DE70FE2B1C3E3B1700540EE7 /* SettingModelView.m */,
-				DE70FE2C1C3E3B1700540EE7 /* SettingModelView.xib */,
-				DE70FE2D1C3E3B1700540EE7 /* ShareView.h */,
-				DE70FE2E1C3E3B1700540EE7 /* ShareView.m */,
-				DE70FE2F1C3E3B1700540EE7 /* ShareView.xib */,
-			);
-			path = customView;
-			sourceTree = "<group>";
-		};
-		DE70FE301C3E3B1700540EE7 /* TYAlertController */ = {
-			isa = PBXGroup;
-			children = (
-				DE70FE311C3E3B1700540EE7 /* TYAlertController+TransitionAnimate.m */,
-				DE70FE321C3E3B1700540EE7 /* TYAlertController.h */,
-				DE70FE331C3E3B1700540EE7 /* TYAlertController.m */,
-				DE70FE341C3E3B1700540EE7 /* TYAlertDropDownAnimation.h */,
-				DE70FE351C3E3B1700540EE7 /* TYAlertDropDownAnimation.m */,
-				DE70FE361C3E3B1700540EE7 /* TYAlertFadeAnimation.h */,
-				DE70FE371C3E3B1700540EE7 /* TYAlertFadeAnimation.m */,
-				DE70FE381C3E3B1700540EE7 /* TYAlertScaleFadeAnimation.h */,
-				DE70FE391C3E3B1700540EE7 /* TYAlertScaleFadeAnimation.m */,
-				DE70FE3A1C3E3B1700540EE7 /* TYAlertView.h */,
-				DE70FE3B1C3E3B1700540EE7 /* TYAlertView.m */,
-				DE70FE3C1C3E3B1700540EE7 /* TYBaseAnimation.h */,
-				DE70FE3D1C3E3B1700540EE7 /* TYBaseAnimation.m */,
-				DE70FE3E1C3E3B1700540EE7 /* TYShowAlertView.h */,
-				DE70FE3F1C3E3B1700540EE7 /* TYShowAlertView.m */,
-				DE70FE401C3E3B1700540EE7 /* UIView+TYAlertView.h */,
-				DE70FE411C3E3B1700540EE7 /* UIView+TYAlertView.m */,
-				DE70FE421C3E3B1700540EE7 /* UIView+TYAutoLayout.h */,
-				DE70FE431C3E3B1700540EE7 /* UIView+TYAutoLayout.m */,
-			);
-			path = TYAlertController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -390,9 +297,7 @@
 			files = (
 				DE70FDEA1C3E2FD900540EE7 /* LaunchScreen.storyboard in Resources */,
 				DE70FE1C1C3E331A00540EE7 /* RichText.storyboard in Resources */,
-				DE70FE491C3E3B1700540EE7 /* ShareView.xib in Resources */,
 				DE70FDE71C3E2FD900540EE7 /* Assets.xcassets in Resources */,
-				DE70FE471C3E3B1700540EE7 /* SettingModelView.xib in Resources */,
 				DE70FDE51C3E2FD900540EE7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,27 +323,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE70FE501C3E3B1700540EE7 /* TYBaseAnimation.m in Sources */,
-				DE70FE1A1C3E330100540EE7 /* RichTextPreviewVC.m in Sources */,
-				DE70FE531C3E3B1700540EE7 /* UIView+TYAutoLayout.m in Sources */,
+				DE6D51CC1CCF5533006B0E9B /* PictureModel.m in Sources */,
 				DE70FDE21C3E2FD900540EE7 /* ViewController.m in Sources */,
-				DE70FE4D1C3E3B1700540EE7 /* TYAlertFadeAnimation.m in Sources */,
-				DE70FE4E1C3E3B1700540EE7 /* TYAlertScaleFadeAnimation.m in Sources */,
-				DE70FE4A1C3E3B1700540EE7 /* TYAlertController+TransitionAnimate.m in Sources */,
+				DE6D51C91CCF4B43006B0E9B /* NSAttributedString+html.m in Sources */,
 				DE70FE171C3E311600540EE7 /* NSAttributedString+RichText.m in Sources */,
-				DE70FE481C3E3B1700540EE7 /* ShareView.m in Sources */,
-				DE70FE4C1C3E3B1700540EE7 /* TYAlertDropDownAnimation.m in Sources */,
-				DE70FE441C3E3B1700540EE7 /* TYAlertController+BlurEffects.m in Sources */,
 				DE70FDDF1C3E2FD900540EE7 /* AppDelegate.m in Sources */,
-				DE70FE521C3E3B1700540EE7 /* UIView+TYAlertView.m in Sources */,
-				DE70FE4B1C3E3B1700540EE7 /* TYAlertController.m in Sources */,
-				DE70FE451C3E3B1700540EE7 /* UIImage+ImageEffects.m in Sources */,
-				DE70FE511C3E3B1700540EE7 /* TYShowAlertView.m in Sources */,
 				DE70FE141C3E30A400540EE7 /* ImageTextAttachment.m in Sources */,
-				DE70FE4F1C3E3B1700540EE7 /* TYAlertView.m in Sources */,
 				DE70FE221C3E366E00540EE7 /* RichTextViewController.m in Sources */,
 				DE70FDDC1C3E2FD900540EE7 /* main.m in Sources */,
-				DE70FE461C3E3B1700540EE7 /* SettingModelView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,6 +556,7 @@
 				DE70FE061C3E2FD900540EE7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DE70FE071C3E2FD900540EE7 /* Build configuration list for PBXNativeTarget "RichTextViewTests" */ = {
 			isa = XCConfigurationList;
@@ -672,6 +565,7 @@
 				DE70FE091C3E2FD900540EE7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DE70FE0A1C3E2FD900540EE7 /* Build configuration list for PBXNativeTarget "RichTextViewUITests" */ = {
 			isa = XCConfigurationList;
@@ -680,6 +574,7 @@
 				DE70FE0C1C3E2FD900540EE7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

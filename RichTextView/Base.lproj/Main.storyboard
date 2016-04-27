@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="6JK-Kr-1wN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="6JK-Kr-1wN">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -33,29 +33,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W34-7T-Tst">
-                                <rect key="frame" x="0.0" y="60" width="600" height="40"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W34-7T-Tst">
+                                <rect key="frame" x="0.0" y="84" width="600" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="5QL-o5-PgC"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="开始编辑"/>
                                 <connections>
                                     <action selector="richtext:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aW8-MC-S6a"/>
                                 </connections>
                             </button>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dqR-CP-9T3">
+                                <rect key="frame" x="0.0" y="124" width="600" height="476"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="dqR-CP-9T3" secondAttribute="bottom" id="0yB-wk-R0h"/>
                             <constraint firstItem="W34-7T-Tst" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="7XV-DJ-LGQ"/>
-                            <constraint firstItem="W34-7T-Tst" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="40" id="g1q-if-VHI"/>
+                            <constraint firstItem="dqR-CP-9T3" firstAttribute="top" secondItem="W34-7T-Tst" secondAttribute="bottom" id="eIn-eA-0qd"/>
+                            <constraint firstItem="W34-7T-Tst" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="g1q-if-VHI"/>
+                            <constraint firstItem="dqR-CP-9T3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="iMO-Em-31u"/>
+                            <constraint firstAttribute="trailing" secondItem="dqR-CP-9T3" secondAttribute="trailing" id="qgl-gy-1gn"/>
                             <constraint firstAttribute="trailing" secondItem="W34-7T-Tst" secondAttribute="trailing" id="wCH-up-EEO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9FG-kY-XeJ"/>
+                    <connections>
+                        <outlet property="webView" destination="dqR-CP-9T3" id="Ymv-sg-1qy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="55" y="625"/>
+            <point key="canvasLocation" x="364" y="438"/>
         </scene>
     </scenes>
 </document>

@@ -8,7 +8,8 @@
 
 #import "ViewController.h"
 #import "RichTextViewController.h"
-@interface ViewController ()
+#import "PictureModel.h"
+@interface ViewController ()<RichTextViewControllerDelegate>
 
 @end
 
@@ -20,6 +21,8 @@
 }
 - (IBAction)richtext:(id)sender {
     RichTextViewController * ctrl=[RichTextViewController ViewController];
+    ctrl.RTDelegate=self;
+    ctrl.feedbackHtml=YES;
     ctrl.finished=^(id content){
         NSArray * arr=(NSArray *)content;
         NSLog(@"count--%lu",(unsigned long)arr.count);
@@ -37,6 +40,36 @@
     [self.navigationController pushViewController:ctrl animated:YES];
 }
 
+
+
+#pragma mark RichTextViewControllerDelegate
+-(void)uploadImageArray:(NSArray *)imageArr withCompletion:(NSString * (^)(NSArray * urlArray))completion;
+{
+    
+    //上传图片
+    
+    
+    //把图片地址传入
+    NSMutableArray * urlArr=[NSMutableArray array];
+    //模拟图片上传，返回每个图片的地址和大小
+    for (int i=0; i<imageArr.count; i++) {
+        PictureModel * model=[[PictureModel alloc]init];
+        model.imageurl=@"http://photocdn.sohu.com/20160426/Img446187083.jpg";
+        [urlArr addObject:model];
+    }
+    
+    
+    
+    //获取到网页
+   NSString * htmlStr=completion(urlArr);
+    
+    NSLog(@"htmlStr--%@",htmlStr);
+
+    
+    //这个显示就看大家怎么处理了
+    [self.webView loadHTMLString:htmlStr baseURL:nil];
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

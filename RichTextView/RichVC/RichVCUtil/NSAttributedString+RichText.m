@@ -31,7 +31,22 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     
     return plainString;
 }
-
+-(NSArray *)getImgaeArray
+{
+    
+    
+    NSMutableArray * imageArr=[NSMutableArray array];
+    [self enumerateAttribute:NSAttachmentAttributeName inRange:NSMakeRange(0, self.length)
+                     options:0
+                  usingBlock:^(id value, NSRange range, BOOL *stop) {
+                      if (value && [value isKindOfClass:[ImageTextAttachment class]]) {
+                          ImageTextAttachment* TA=(ImageTextAttachment*)value;
+                          [imageArr addObject:TA.image];
+                      }
+                  }];
+    
+    return imageArr;
+}
 -(NSMutableArray *)getArrayWithAttributed
 {
     
