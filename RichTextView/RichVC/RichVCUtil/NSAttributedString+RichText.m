@@ -182,7 +182,7 @@ static NSDictionary *nameToWeight;
         UIColor * fontColor= Attributes[@"NSColor"];
         if (fontColor!=nil) {
             
-            [AttributeDict setObject:[self getRGBDictionaryByColor:fontColor] forKey:@"color"];
+            [AttributeDict setObject:[self getHexStringByColor:fontColor] forKey:@"color"];
         }
         //2.图片
         ImageTextAttachment * ImageAtt = Attributes[@"NSAttachment"];
