@@ -21,8 +21,13 @@
 }
 - (IBAction)richtext:(id)sender {
     RichTextViewController * ctrl=[RichTextViewController ViewController];
-    ctrl.RTDelegate=self;
-    ctrl.feedbackHtml=YES;
+    
+//    需要返回的是网页
+//    ctrl.RTDelegate=self;
+//    ctrl.feedbackHtml=YES;
+    
+    
+//    无需返回网页
     ctrl.finished=^(id content){
         NSArray * arr=(NSArray *)content;
         NSLog(@"count--%lu",(unsigned long)arr.count);

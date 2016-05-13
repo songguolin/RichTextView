@@ -8,10 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "NSAttributedString+RichText.h"
 #import "ImageTextAttachment.h"
-#define kUIColorFromRGB(rgbValue) [UIColor \
-colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
-green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
-blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
 
 
 @implementation NSAttributedString (RichText)
@@ -190,7 +187,7 @@ static NSDictionary *nameToWeight;
         //2.图片
         ImageTextAttachment * ImageAtt = Attributes[@"NSAttachment"];
         if (ImageAtt!=nil) {
-            [AttributeDict setObject:@"image" forKey:@"image"];
+            [AttributeDict setObject:ImageAtt.image forKey:@"image"];
             //这里为title加上图片标示
             [AttributeDict setObject:ImageAtt.imageTag forKey:@"title"];
         }
