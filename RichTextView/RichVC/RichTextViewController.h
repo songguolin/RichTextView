@@ -17,8 +17,10 @@
 
 
 
-
+typedef void (^inputFinished)(NSArray *  content,NSArray * imageArr);
 typedef NSArray *(^uploadCompelte)(void);
+
+IB_DESIGNABLE
 @interface RichTextViewController : UIViewController
 
 @property (weak,nonatomic) id<RichTextViewControllerDelegate>RTDelegate;
@@ -27,16 +29,19 @@ typedef NSArray *(^uploadCompelte)(void);
 @property (weak, nonatomic) IBOutlet UIButton *colorBtn;
 @property (weak, nonatomic) IBOutlet UIButton *boldBtn;
 @property (weak, nonatomic) IBOutlet UIButton *imageBtn;
-@property (weak, nonatomic) IBOutlet UIButton *previewBtn;
 
 
+//提示字
+@property (nonatomic,copy) IBInspectable NSString * placeholderText;
 //是否返回的是网页，是的话请实现 代理方法
 @property (nonatomic,assign) BOOL feedbackHtml;
-
 //这一种是返回
-@property (nonatomic,copy) void (^finished)(id  content);
+@property (nonatomic,copy) inputFinished finished;
 
 //初始化页面
 +(instancetype)ViewController;
-
+//
+////编辑富文本，设置内容
+//-(void)setContent:(NSArray *)content;
+@property (nonatomic,strong) NSArray * content;
 @end

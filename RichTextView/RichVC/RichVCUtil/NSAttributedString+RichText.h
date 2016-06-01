@@ -26,4 +26,6 @@
 - (NSString *)getHexStringByColor:(UIColor *)originColor;
 //获取有 rgb，alpha的字典
 - (NSDictionary *)getRGBDictionaryByColor:(UIColor *)originColor;
+
+
 @end

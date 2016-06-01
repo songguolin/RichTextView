@@ -136,7 +136,7 @@ static NSDictionary *nameToWeight;
     //枚举出所有的附件字符串-这个是顺序来的NSAttributedStringEnumerationLongestEffectiveRangeNotRequired
     [self enumerateAttributesInRange:NSMakeRange(0, self.length) options:NSAttributedStringEnumerationLongestEffectiveRangeNotRequired usingBlock:^(NSDictionary *Attributes, NSRange range, BOOL *stop) {
         
-        NSLog(@"Attributes--%@",Attributes);
+       
         NSMutableDictionary * AttributeDict=[NSMutableDictionary dictionary];
         //1.  通过range取出相应的字符串
         NSString * title=[self.string substringWithRange:range];
@@ -159,6 +159,8 @@ static NSDictionary *nameToWeight;
         //2.取出字体描述fontDescriptor
         NSDictionary *traits = [font.fontDescriptor objectForKey:UIFontDescriptorTraitsAttribute];
         CGFloat weight=[traits[UIFontWeightTrait] doubleValue];
+
+        
         if (weight>0.0) {
             [AttributeDict setObject:[NSNumber numberWithBool:YES] forKey:@"bold"];
         }
@@ -264,4 +266,7 @@ static NSDictionary *nameToWeight;
              @"A":@(a)};
     
 }
+
+
+
 @end

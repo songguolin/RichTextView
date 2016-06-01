@@ -7,16 +7,17 @@
 //
 
 #import "RichTextViewController.h"
-
+#import "SDWebImageDownloader.h"
+#import "SDWebImageManager.h"
 
 
 #import "ImageTextAttachment.h"
 #import "NSAttributedString+RichText.h"
 #import "PictureModel.h"
 #import "NSAttributedString+html.h"
-
+#import "UIColor+BeeExtension.h"
 //Image default max size
-#define IMAGE_MAX_SIZE ([UIScreen mainScreen].bounds.size.width-10)
+#define IMAGE_MAX_SIZE (200)
 
 #define ImageTag (@"[UIImageView]")
 #define DefaultFont (16)
@@ -24,7 +25,10 @@
 
 @interface RichTextViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate,UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *textView;
-
+@property (assign,nonatomic) NSUInteger finishImageNum;//纪录图片下载完成数目
+@property (assign,nonatomic) NSUInteger apperImageNum; //纪录图片将要下载数目
+//默认提示字
+@property (weak, nonatomic) IBOutlet UILabel *placeholderLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraint;
 
 
@@ -78,19 +82,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardNotification:) name:UIKeyboardWillShowNotification object:nil];
     
     
-    UIBarButtonItem * backItem=[[UIBarButtonItem alloc]initWithTitle:@"back" style:UIBarButtonItemStylePlain target:self action:@selector(backClick)];
     
-    self.navigationItem.leftBarButtonItem=backItem;
-}
-
-//返回保存数据
--(void)backClick
-{
-    [self finishClick:nil];
     
-    [self.navigationController popViewControllerAnimated:YES];
+    if (self.content!=nil) {
+        [self setContentArr:self.content];
+    }
 }
-
 
 
 
@@ -228,11 +225,22 @@
 //}
 -(void)textViewDidChange:(UITextView *)textView
 {
+    
+    if (textView.attributedText.length>0) {
+        self.placeholderLabel.hidden=YES;
+    }
+    else
+    {
+        self.placeholderLabel.hidden=NO;
+    }
+    
+    
     NSInteger len=textView.attributedText.length-self.locationStr.length;
 
     
     if (len>0) {
        
+        
         self.isDelete=NO;
         self.newRange=NSMakeRange(self.textView.selectedRange.location-len, len);
         self.newstr=[textView.text substringWithRange:self.newRange];
@@ -240,6 +248,7 @@
     }
     else
     {
+        
         self.isDelete=YES;
 
     }
@@ -312,10 +321,7 @@
 //完成
 - (IBAction)finishClick:(UIButton *)sender {
 
-    //注意这下面的三种 数据
-//    NSLog(@"textStorage。getPlainString--%@",[_textView.textStorage getPlainString]);
-//    NSLog(@"attributedText。getPlainString--%@",[_textView.attributedText getPlainString]);
-//    NSLog(@"attributedText--%@",self.textView.attributedText);
+
     if (self.feedbackHtml) {
         if ([self.RTDelegate respondsToSelector:@selector(uploadImageArray:withCompletion:)]) {
             //实现上传图片的代理，用url替换图片标识
@@ -330,9 +336,14 @@
     else
     {
 
+        //注意这下面的三种 数据
+
+        //    NSLog(@"attributedText。getPlainString--%@",[_textView.attributedText getPlainString]);
+        //    NSLog(@"attributedText--%@",self.textView.attributedText);
         //这个是返回数组，每个数组装有不同设置的字符串
         if (self.finished!=nil) {
-            self.finished([_textView.attributedText getArrayWithAttributed]);
+
+            self.finished([_textView.attributedText getArrayWithAttributed],[_textView.attributedText getImgaeArray]);
             
         }
  
@@ -346,6 +357,7 @@
     if (sender.selected) {
         self.fontColor=[UIColor redColor];
         
+        
     }
     else
     {
@@ -358,11 +370,7 @@
     
     //设置字的设置
     [self setInitLocation];
-    
-
-    
-    
-    
+ 
 }
 //加粗
 - (IBAction)boldClick:(UIButton *)sender {
@@ -371,8 +379,6 @@
     self.isBold=sender.selected;
     if (self.isBold) {
         sender.titleLabel.font=[UIFont systemFontOfSize:12];
-        
-        
     }
     else
     {
@@ -405,8 +411,6 @@
     [self.view endEditing:YES];
     
 
-    
-    
     __weak typeof(self) weakSelf=self;
     UIAlertController * alertVC=[UIAlertController alertControllerWithTitle:@"选择照片" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     [alertVC addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -429,7 +433,7 @@
     
     imagePickerController.delegate = self;
     
-    imagePickerController.allowsEditing = YES;
+    imagePickerController.allowsEditing = NO;
     
     imagePickerController.sourceType = sourceType;
     
@@ -440,11 +444,10 @@
 #pragma mark - image picker delegte
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    
-    [self appenReturn];
+   [self appenReturn];
     [picker dismissViewControllerAnimated:YES completion:^{}];
     
-    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     /* 此处info 有六个值
      * UIImagePickerControllerMediaType; // an NSString UTTypeImage)
      * UIImagePickerControllerOriginalImage;  // a UIImage 原始图片
@@ -456,32 +459,63 @@
      */
     //    // 保存图片至本地，方法见下文
     //    NSLog(@"img = %@",image);
-    image = [self compressImage:image toMaxFileSize:0.2];
+    
+    //图片添加后 自动换行
+    [self setImageText:image withRange:self.textView.selectedRange appenReturn:YES];
+    
+    [self.textView becomeFirstResponder];
+    
+}
+//设置图片
+-(void)setImageText:(UIImage *)img withRange:(NSRange)range appenReturn:(BOOL)appen
+{
+    
+ 
+    UIImage * image=img;
+    
+    if (image == nil)
+    {
+        return;
+    }
+    
+   
+    if (![image isKindOfClass:[UIImage class]])           // UIImage资源
+    {
+        
+        return;
+    }
+    
+    
+    CGFloat ImgeHeight=image.size.height*IMAGE_MAX_SIZE/image.size.width;
+    if (ImgeHeight>IMAGE_MAX_SIZE*2) {
+        ImgeHeight=IMAGE_MAX_SIZE*2;
+    }
     
     
     ImageTextAttachment *imageTextAttachment = [ImageTextAttachment new];
     
-    image=[imageTextAttachment scaleImage:image withSize:CGSizeMake(IMAGE_MAX_SIZE, IMAGE_MAX_SIZE/2)];
     //Set tag and image
     imageTextAttachment.imageTag = ImageTag;
     imageTextAttachment.image =image;
     
     //Set image size
-    imageTextAttachment.imageSize = CGSizeMake(IMAGE_MAX_SIZE, IMAGE_MAX_SIZE/2);
+    imageTextAttachment.imageSize = CGSizeMake(IMAGE_MAX_SIZE, ImgeHeight);
+
     
     //Insert image image
     [_textView.textStorage insertAttributedString:[NSAttributedString attributedStringWithAttachment:imageTextAttachment]
-                                          atIndex:_textView.selectedRange.location];
+                                          atIndex:range.location];
     
     //Move selection location
-    _textView.selectedRange = NSMakeRange(_textView.selectedRange.location + 1, _textView.selectedRange.length);
+    _textView.selectedRange = NSMakeRange(range.location + 1, range.length);
     
-    
-    //设置字的设置
+    //设置locationStr的设置
     [self setInitLocation];
-    
-    [self appenReturn];
-    
+    if(appen)
+    {
+           [self appenReturn]; 
+    }
+
 }
 
 - (UIImage *)compressImage:(UIImage *)image toMaxFileSize:(NSInteger)maxFileSize {
@@ -498,6 +532,14 @@
 }
 
 -(void)appenReturn
+{
+    NSAttributedString * returnStr=[[NSAttributedString alloc]initWithString:@"\n"];
+    NSMutableAttributedString * att=[[NSMutableAttributedString alloc]initWithAttributedString:_textView.attributedText];
+    [att appendAttributedString:returnStr];
+    
+    _textView.attributedText=att;
+}
+-(void)insertReturn
 {
     NSAttributedString * returnStr=[[NSAttributedString alloc]initWithString:@"\n"];
     NSMutableAttributedString * att=[[NSMutableAttributedString alloc]initWithAttributedString:_textView.attributedText];
@@ -529,33 +571,6 @@
 -(NSString *)replacetagWithImageArray:(NSArray *)picArr
 {
 
-//    NSMutableAttributedString * contentStr=[[NSMutableAttributedString alloc]initWithAttributedString:_textView.attributedText];
-//    NSInteger count=0;
-//    [contentStr enumerateAttribute:NSAttachmentAttributeName inRange:NSMakeRange(0, contentStr.length)
-//                     options:0
-//                  usingBlock:^(id value, NSRange range, BOOL *stop) {
-//                      if (value && [value isKindOfClass:[ImageTextAttachment class]]) {
-//                  
-//                          if (count<picArr.count) {
-//                              PictureModel *picture=[picArr objectAtIndex:count];
-//                              NSString * imgTag=[NSString stringWithFormat:@"<img src=\"%@\" w=\"%lu\" h=\"%lu\"/>",picture.imageurl,(unsigned long)picture.width,(unsigned long)picture.height];
-////                              imgTag = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)imgTag, nil, nil, kCFStringEncodingUTF8));
-//                              
-////                             imgTag = [imgTag stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//                              [contentStr replaceCharactersInRange:range withString:imgTag];
-//                          }
-//                          else
-//                          {
-//                              *stop=YES;
-//                          }
-//                          
-//                      }
-//                  }];
-//
-//    
-//    return [contentStr toHtmlString];
-    
-    
     NSMutableAttributedString * contentStr=[[NSMutableAttributedString alloc]initWithAttributedString:_textView.attributedText];
 
     [contentStr enumerateAttribute:NSAttachmentAttributeName inRange:NSMakeRange(0, contentStr.length)
@@ -595,4 +610,154 @@
     return newContent;
 
 }
+
+#pragma mark setter
+-(void)setPlaceholderText:(NSString *)placeholderText
+{
+    _placeholderText=placeholderText;
+    self.placeholderLabel.text=placeholderText;
+}
+
+#pragma mark  设置内容
+
+-(void)setContentArr:(NSArray *)content
+{
+    
+    if (content.count<=0) {
+        self.placeholderLabel.hidden=NO;
+        return;
+    }
+    self.placeholderLabel.hidden=YES;
+    
+    //将要下载的图片数目
+    self.apperImageNum=0;
+
+    NSMutableArray * imageArr=[NSMutableArray array];
+    
+    NSMutableAttributedString * mutableAttributedStr=[[NSMutableAttributedString alloc]init];
+    for (NSDictionary * dict in content) {
+        if (dict[@"image"]!=nil) {
+            NSMutableDictionary * imageMutableDict=[NSMutableDictionary dictionaryWithDictionary:[self imageUrlRX:dict[@"image"]]];
+            [imageMutableDict setObject:[NSNumber numberWithInteger:mutableAttributedStr.length] forKey:@"locLenght"];
+            [imageArr addObject:imageMutableDict];
+            self.apperImageNum++;
+            continue;
+        }
+//        if ([dict[@"title"] isEqualToString: @"\n"]) {
+//            continue;
+//        }
+        NSString * plainStr=dict[@"title"];
+        NSMutableAttributedString * attrubuteStr=[[NSMutableAttributedString alloc]initWithString:plainStr];
+        //设置初始内容
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        paragraphStyle.lineSpacing = [dict[@"lineSpace"] floatValue];// 字体的行间距
+        
+        //是否加粗
+        if ([dict[@"bold"] boolValue]) {
+            NSDictionary *attributes =[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:[dict[@"font"] floatValue] ],NSFontAttributeName,[UIColor colorWithString:dict[@"color"]],NSForegroundColorAttributeName,paragraphStyle,NSParagraphStyleAttributeName,nil ];
+            [attrubuteStr addAttributes:attributes range:NSMakeRange(0, attrubuteStr.length)];
+        }
+        else
+        {
+            NSDictionary *attributes =[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:[dict[@"font"] floatValue]],NSFontAttributeName,[UIColor colorWithString:dict[@"color"]],NSForegroundColorAttributeName,paragraphStyle,NSParagraphStyleAttributeName,nil ];
+            [attrubuteStr addAttributes:attributes range:NSMakeRange(0, attrubuteStr.length)];
+        }
+
+
+        [mutableAttributedStr appendAttributedString:attrubuteStr];
+    }
+    
+    self.textView.attributedText =mutableAttributedStr;
+    
+    NSLog(@"mutableAttributedStr.length---%lu",(unsigned long)mutableAttributedStr.length);
+    
+    //没有图片需要下载
+    if (self.apperImageNum==0) {
+        return;
+    }
+
+    self.finishImageNum=0;
+
+    NSUInteger locLength=0;
+    //替换带有图片标签的,设置图片
+    for (int i=0; i<imageArr.count; i++) {
+        
+//        NSString * locStr=[strArr objectAtIndex:i];
+//        locLength+=locStr.length;
+       NSDictionary * imageDict=[imageArr objectAtIndex:i];
+       locLength=[imageDict[@"locLenght"]integerValue] ;
+        locLength+=i;
+            //只取第一个
+        
+            [self downLoadImageWithUrl:(NSString *)imageDict[@"src"]                                                                                                                                                    WithRange:NSMakeRange(locLength, 0)];
+ 
+        NSLog(@"locLength--%lu",(unsigned long)locLength);
+        //完成之后，纪录的位置移动1,图片长度为1
+        
+    }
+    
+    //设置光标到末尾
+    self.textView.selectedRange=NSMakeRange(self.textView.attributedText.length, 0);
+    
+    
+}
+
+-(void)downLoadImageWithUrl:(NSString *)url WithRange:(NSRange)range
+{
+    
+    __weak typeof(self) weakSelf=self;
+    SDWebImageDownloader *manager = [SDWebImageDownloader sharedDownloader];
+    
+    [manager downloadImageWithURL:[NSURL URLWithString:url] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+        
+    } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+        if(finished)
+        {
+            self.finishImageNum++;
+            
+            if (self.finishImageNum==self.apperImageNum) {
+                  NSLog(@"下载图片完成");
+            }
+          
+            [[SDWebImageManager sharedManager] saveImageToCache:image forURL:[NSURL URLWithString:url]];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                [weakSelf setImageText:image withRange:range appenReturn:NO];
+            });
+            
+            
+            
+        }
+    }];
+    
+}
+//输出正则里面的内容//输出正则里面的内容
+-(NSDictionary *)imageUrlRX:(NSString *)string
+{
+    NSString *pattern = @"<img src=\"([^\\s]*)\" w=\"([^\\s]*)\" h=\"([^\\s]*)\"\\s*/>";
+    NSRegularExpression *expression = [NSRegularExpression regularExpressionWithPattern:pattern
+                                                                                options:0
+                                                                                  error:NULL];
+    NSArray *lines = [expression matchesInString:string options:0 range:NSMakeRange(0, string.length)];
+    
+    NSMutableArray * resultArr=[NSMutableArray array];
+    for (NSTextCheckingResult *textCheckingResult in lines) {
+        NSMutableDictionary *result = [NSMutableDictionary dictionary];
+        
+        //0 代表整个正则内容
+        NSString* value1 = [string substringWithRange:[textCheckingResult rangeAtIndex:1]];
+        NSString* value2 = [string substringWithRange:[textCheckingResult rangeAtIndex:2]];
+        NSString* value3 = [string substringWithRange:[textCheckingResult rangeAtIndex:3]];
+        
+        result[@"src"] = value1;
+        result[@"w"] = value2;
+        result[@"h"] = value3;
+        [resultArr addObject:result];
+        
+    }
+    
+    
+    return resultArr.firstObject;
+}
+
 @end

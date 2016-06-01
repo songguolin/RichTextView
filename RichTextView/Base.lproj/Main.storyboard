@@ -34,11 +34,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W34-7T-Tst">
-                                <rect key="frame" x="0.0" y="84" width="600" height="40"/>
+                                <rect key="frame" x="0.0" y="64" width="100" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="5QL-o5-PgC"/>
+                                    <constraint firstAttribute="width" constant="100" id="8f7-5M-I9f"/>
                                 </constraints>
                                 <state key="normal" title="开始编辑"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="5QL-o5-PgC"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <action selector="richtext:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aW8-MC-S6a"/>
                                 </connections>
@@ -46,18 +52,55 @@
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dqR-CP-9T3">
                                 <rect key="frame" x="0.0" y="124" width="600" height="476"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="476" id="152-ph-Wku"/>
+                                </constraints>
                             </webView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bJi-B2-IOa">
+                                <rect key="frame" x="100" y="64" width="250" height="60"/>
+                                <state key="normal" title="编辑"/>
+                                <connections>
+                                    <action selector="edtingText:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xZC-BX-bU5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nQY-4e-v0c">
+                                <rect key="frame" x="350" y="64" width="250" height="60"/>
+                                <state key="normal" title="列表方式展示"/>
+                                <connections>
+                                    <action selector="viewText:" destination="BYZ-38-t0r" eventType="touchUpInside" id="buJ-1u-FXO"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="dqR-CP-9T3" secondAttribute="bottom" id="0yB-wk-R0h"/>
                             <constraint firstItem="W34-7T-Tst" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="7XV-DJ-LGQ"/>
+                            <constraint firstItem="bJi-B2-IOa" firstAttribute="leading" secondItem="W34-7T-Tst" secondAttribute="trailing" id="EPh-R9-GY2"/>
+                            <constraint firstItem="dqR-CP-9T3" firstAttribute="top" secondItem="nQY-4e-v0c" secondAttribute="bottom" id="Iyu-M5-DlY"/>
+                            <constraint firstItem="W34-7T-Tst" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="NU8-aU-cmk"/>
+                            <constraint firstItem="nQY-4e-v0c" firstAttribute="height" secondItem="bJi-B2-IOa" secondAttribute="height" id="Pl5-8z-rWX"/>
+                            <constraint firstItem="nQY-4e-v0c" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="TjM-0x-GCR"/>
+                            <constraint firstItem="nQY-4e-v0c" firstAttribute="width" secondItem="bJi-B2-IOa" secondAttribute="width" id="ZcB-7F-NIf"/>
                             <constraint firstItem="dqR-CP-9T3" firstAttribute="top" secondItem="W34-7T-Tst" secondAttribute="bottom" id="eIn-eA-0qd"/>
+                            <constraint firstItem="bJi-B2-IOa" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="ecz-IY-k1J"/>
                             <constraint firstItem="W34-7T-Tst" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="g1q-if-VHI"/>
+                            <constraint firstItem="dqR-CP-9T3" firstAttribute="top" secondItem="bJi-B2-IOa" secondAttribute="bottom" id="hfh-7d-HGC"/>
                             <constraint firstItem="dqR-CP-9T3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="iMO-Em-31u"/>
+                            <constraint firstItem="W34-7T-Tst" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="ohF-7B-1es"/>
                             <constraint firstAttribute="trailing" secondItem="dqR-CP-9T3" secondAttribute="trailing" id="qgl-gy-1gn"/>
+                            <constraint firstItem="nQY-4e-v0c" firstAttribute="leading" secondItem="bJi-B2-IOa" secondAttribute="trailing" id="vgv-YN-KiD"/>
                             <constraint firstAttribute="trailing" secondItem="W34-7T-Tst" secondAttribute="trailing" id="wCH-up-EEO"/>
+                            <constraint firstItem="dqR-CP-9T3" firstAttribute="top" secondItem="W34-7T-Tst" secondAttribute="bottom" id="wxP-TV-gCl"/>
+                            <constraint firstAttribute="trailing" secondItem="nQY-4e-v0c" secondAttribute="trailing" id="xMh-Td-FrO"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="7XV-DJ-LGQ"/>
+                                <exclude reference="g1q-if-VHI"/>
+                                <exclude reference="wCH-up-EEO"/>
+                                <exclude reference="eIn-eA-0qd"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="9FG-kY-XeJ"/>
                     <connections>

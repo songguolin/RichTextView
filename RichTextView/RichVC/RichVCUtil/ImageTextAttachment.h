@@ -13,4 +13,5 @@
 @property(assign, nonatomic) CGSize imageSize;  //For emoji image size
 
 - (UIImage *)scaleImage:(UIImage *)image withSize:(CGSize)size;
+- (UIImage*)getMaxImage:(UIImage *)image withSize:(CGSize)size;
 @end

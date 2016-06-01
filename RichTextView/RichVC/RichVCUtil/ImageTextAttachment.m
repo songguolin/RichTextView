@@ -24,4 +24,36 @@
     UIGraphicsEndImageContext();
     return scaledImage;
 }
+
+- (UIImage*)getMaxImage:(UIImage *)image withSize:(CGSize)size
+{
+    if (size.width == 0 || size.height == 0)
+        return image;
+    CGSize imgSize = image.size;
+    float scale    = size.height / size.width;
+    float imgScale = imgSize.height / imgSize.width;
+    float width    = 0.0f;
+    float height   = 0.0f;
+    
+    if (imgScale < scale && imgSize.width > size.width)
+    {
+        width  = size.width;
+        height = width * imgScale;
+    }
+    else if (imgScale > scale && imgSize.height > size.height)
+    {
+        height = size.height;
+        width  = height / imgScale;
+    }
+    else
+    {
+        width  = size.width;
+        height = size.height;
+    }
+    UIGraphicsBeginImageContext(CGSizeMake(width, height));
+    [image drawInRect:CGRectMake(0, 0, width, height)];
+    UIImage* imagemax= UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return imagemax;
+}
 @end
