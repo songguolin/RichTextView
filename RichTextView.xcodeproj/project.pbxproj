@@ -57,8 +57,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		DE67C49F1CFEC5BF000D0B36 /* NSJSON+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSJSON+Extension.h"; sourceTree = "<group>"; };
-		DE67C4A01CFEC5BF000D0B36 /* NSJSON+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSJSON+Extension.m"; sourceTree = "<group>"; };
+		DE67C49F1CFEC5BF000D0B36 /* NSJSON+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSJSON+Extension.h"; path = "../../NSJSON+Extension.h"; sourceTree = "<group>"; };
+		DE67C4A01CFEC5BF000D0B36 /* NSJSON+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSJSON+Extension.m"; path = "../../NSJSON+Extension.m"; sourceTree = "<group>"; };
 		DE67C4A91CFED135000D0B36 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
 		DE67C4AA1CFED135000D0B36 /* NSData+ImageContentType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+ImageContentType.m"; sourceTree = "<group>"; };
 		DE67C4AB1CFED135000D0B36 /* SDImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageCache.h; sourceTree = "<group>"; };
@@ -225,8 +225,6 @@
 				DE70FE0D1C3E301A00540EE7 /* RichVC */,
 				DE70FDDD1C3E2FD900540EE7 /* AppDelegate.h */,
 				DE70FDDE1C3E2FD900540EE7 /* AppDelegate.m */,
-				DE67C49F1CFEC5BF000D0B36 /* NSJSON+Extension.h */,
-				DE67C4A01CFEC5BF000D0B36 /* NSJSON+Extension.m */,
 				DE70FDE01C3E2FD900540EE7 /* ViewController.h */,
 				DE70FDE11C3E2FD900540EE7 /* ViewController.m */,
 				DE67C4D71CFED1DC000D0B36 /* PrefixHeader.pch */,
@@ -288,6 +286,8 @@
 				DE70FE161C3E311600540EE7 /* NSAttributedString+RichText.m */,
 				DE67C4D81CFED905000D0B36 /* UIColor+BeeExtension.h */,
 				DE67C4D91CFED905000D0B36 /* UIColor+BeeExtension.m */,
+				DE67C49F1CFEC5BF000D0B36 /* NSJSON+Extension.h */,
+				DE67C4A01CFEC5BF000D0B36 /* NSJSON+Extension.m */,
 			);
 			path = RichVCUtil;
 			sourceTree = "<group>";

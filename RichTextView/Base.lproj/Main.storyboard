@@ -57,17 +57,10 @@
                                 </constraints>
                             </webView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bJi-B2-IOa">
-                                <rect key="frame" x="100" y="64" width="250" height="60"/>
-                                <state key="normal" title="编辑"/>
+                                <rect key="frame" x="100" y="64" width="135" height="60"/>
+                                <state key="normal" title="从后台拿到数据编辑"/>
                                 <connections>
                                     <action selector="edtingText:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xZC-BX-bU5"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nQY-4e-v0c">
-                                <rect key="frame" x="350" y="64" width="250" height="60"/>
-                                <state key="normal" title="列表方式展示"/>
-                                <connections>
-                                    <action selector="viewText:" destination="BYZ-38-t0r" eventType="touchUpInside" id="buJ-1u-FXO"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -76,11 +69,7 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="dqR-CP-9T3" secondAttribute="bottom" id="0yB-wk-R0h"/>
                             <constraint firstItem="W34-7T-Tst" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="7XV-DJ-LGQ"/>
                             <constraint firstItem="bJi-B2-IOa" firstAttribute="leading" secondItem="W34-7T-Tst" secondAttribute="trailing" id="EPh-R9-GY2"/>
-                            <constraint firstItem="dqR-CP-9T3" firstAttribute="top" secondItem="nQY-4e-v0c" secondAttribute="bottom" id="Iyu-M5-DlY"/>
                             <constraint firstItem="W34-7T-Tst" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="NU8-aU-cmk"/>
-                            <constraint firstItem="nQY-4e-v0c" firstAttribute="height" secondItem="bJi-B2-IOa" secondAttribute="height" id="Pl5-8z-rWX"/>
-                            <constraint firstItem="nQY-4e-v0c" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="TjM-0x-GCR"/>
-                            <constraint firstItem="nQY-4e-v0c" firstAttribute="width" secondItem="bJi-B2-IOa" secondAttribute="width" id="ZcB-7F-NIf"/>
                             <constraint firstItem="dqR-CP-9T3" firstAttribute="top" secondItem="W34-7T-Tst" secondAttribute="bottom" id="eIn-eA-0qd"/>
                             <constraint firstItem="bJi-B2-IOa" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="ecz-IY-k1J"/>
                             <constraint firstItem="W34-7T-Tst" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="g1q-if-VHI"/>
@@ -88,10 +77,8 @@
                             <constraint firstItem="dqR-CP-9T3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="iMO-Em-31u"/>
                             <constraint firstItem="W34-7T-Tst" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="ohF-7B-1es"/>
                             <constraint firstAttribute="trailing" secondItem="dqR-CP-9T3" secondAttribute="trailing" id="qgl-gy-1gn"/>
-                            <constraint firstItem="nQY-4e-v0c" firstAttribute="leading" secondItem="bJi-B2-IOa" secondAttribute="trailing" id="vgv-YN-KiD"/>
                             <constraint firstAttribute="trailing" secondItem="W34-7T-Tst" secondAttribute="trailing" id="wCH-up-EEO"/>
                             <constraint firstItem="dqR-CP-9T3" firstAttribute="top" secondItem="W34-7T-Tst" secondAttribute="bottom" id="wxP-TV-gCl"/>
-                            <constraint firstAttribute="trailing" secondItem="nQY-4e-v0c" secondAttribute="trailing" id="xMh-Td-FrO"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
