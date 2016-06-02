@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "UIColor+HEX.h"
 @interface NSAttributedString (RichText)
 /**
  *  获取带有图片标示的一个普通字符串
@@ -22,8 +22,7 @@
 //返回数组，每个数组是一种属性和对应的内容
 -(NSMutableArray *)getArrayWithAttributed;
 
-//获取颜色值
-- (NSString *)getHexStringByColor:(UIColor *)originColor;
+
 //获取有 rgb，alpha的字典
 - (NSDictionary *)getRGBDictionaryByColor:(UIColor *)originColor;
 

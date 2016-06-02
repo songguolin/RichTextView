@@ -184,7 +184,7 @@ static NSDictionary *nameToWeight;
         UIColor * fontColor= Attributes[@"NSColor"];
         if (fontColor!=nil) {
             
-            [AttributeDict setObject:[self getHexStringByColor:fontColor] forKey:@"color"];
+            [AttributeDict setObject:[fontColor HEXString] forKey:@"color"];
         }
         //2.图片
         ImageTextAttachment * ImageAtt = Attributes[@"NSAttachment"];
@@ -209,28 +209,7 @@ static NSDictionary *nameToWeight;
     
 }
 
-- (NSString *)getHexStringByColor:(UIColor *)originColor
 
-{
-    
-    NSDictionary *colorDic = [self getRGBDictionaryByColor:originColor];
-    
-    int r = [colorDic[@"R"] floatValue] * 255;
-    
-    int g = [colorDic[@"G"] floatValue] * 255;
-    
-    int b = [colorDic[@"B"] floatValue] * 255;
-    
-    NSString *red = [NSString stringWithFormat:@"%02x", r];
-    
-    NSString *green = [NSString stringWithFormat:@"%02x", g];
-    
-    NSString *blue = [NSString stringWithFormat:@"%02x", b];
-    
-   
-    return [NSString stringWithFormat:@"#%@%@%@", red, green, blue];
-    
-}
 - (NSDictionary *)getRGBDictionaryByColor:(UIColor *)originColor
 
 {

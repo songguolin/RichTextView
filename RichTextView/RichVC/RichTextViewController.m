@@ -15,9 +15,9 @@
 #import "NSAttributedString+RichText.h"
 #import "PictureModel.h"
 #import "NSAttributedString+html.h"
-#import "UIColor+BeeExtension.h"
-//Image default max size
-#define IMAGE_MAX_SIZE (200)
+
+//Image default max size，图片显示的最大宽度
+#define IMAGE_MAX_SIZE (100)
 
 #define ImageTag (@"[UIImageView]")
 #define DefaultFont (16)
@@ -226,65 +226,50 @@
 -(void)textViewDidChange:(UITextView *)textView
 {
     
-    if (textView.attributedText.length>0) {
+    if (self.textView.attributedText.length>0) {
         self.placeholderLabel.hidden=YES;
     }
     else
     {
         self.placeholderLabel.hidden=NO;
     }
-    
-    
     NSInteger len=textView.attributedText.length-self.locationStr.length;
-
-    
     if (len>0) {
-       
         
         self.isDelete=NO;
         self.newRange=NSMakeRange(self.textView.selectedRange.location-len, len);
         self.newstr=[textView.text substringWithRange:self.newRange];
- 
+        
     }
     else
     {
-        
         self.isDelete=YES;
-
+        
     }
-   
+
     
+# warning  如果出现输入问题，检查这里
     bool isChinese;//判断当前输入法是否是中文
-    
-    NSArray *currentar = [UITextInputMode activeInputModes];
-    UITextInputMode *textInputMode = [currentar firstObject];
-    
-    if ([[textInputMode primaryLanguage] isEqualToString: @"en-US"]) {
+
+    if ([[[textView textInputMode] primaryLanguage]  isEqualToString: @"en-US"]) {
         isChinese = false;
     }
     else
     {
         isChinese = true;
     }
-   
+    
     NSString *str = [[ self.textView text] stringByReplacingOccurrencesOfString:@"?" withString:@""];
     if (isChinese) { //中文输入法下
-        
-        
-        
         UITextRange *selectedRange = [ self.textView markedTextRange];
-        
         
         //获取高亮部分
         UITextPosition *position = [ self.textView positionFromPosition:selectedRange.start offset:0];
-      
-       
-        
         // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
         if (!position) {
 //            NSLog(@"汉字");
-//              NSLog(@"str=%@; 本次长度=%lu",str,(unsigned long)[str length]);
-           
+            //              NSLog(@"str=%@; 本次长度=%lu",str,(unsigned long)[str length]);
+            
             [self setStyle];
             if ( str.length>=MaxLength) {
                 NSString *strNew = [NSString stringWithString:str];
@@ -302,7 +287,7 @@
         }
     }else{
 //        NSLog(@"英文");
-      
+        
         [self setStyle];
         if ([str length]>=MaxLength) {
             NSString *strNew = [NSString stringWithString:str];
@@ -501,10 +486,22 @@
     //Set image size
     imageTextAttachment.imageSize = CGSizeMake(IMAGE_MAX_SIZE, ImgeHeight);
 
-    
-    //Insert image image
-    [_textView.textStorage insertAttributedString:[NSAttributedString attributedStringWithAttachment:imageTextAttachment]
-                                          atIndex:range.location];
+
+    if (appen) {
+        //Insert image image
+        [_textView.textStorage insertAttributedString:[NSAttributedString attributedStringWithAttachment:imageTextAttachment]
+                                              atIndex:range.location];
+    }
+    else
+    {
+        if (_textView.textStorage.length>0) {
+           
+            //Insert image image
+            [_textView.textStorage replaceCharactersInRange:range withAttributedString:[NSAttributedString attributedStringWithAttachment:imageTextAttachment]];
+        }
+
+    }
+
     
     //Move selection location
     _textView.selectedRange = NSMakeRange(range.location + 1, range.length);
@@ -518,18 +515,7 @@
 
 }
 
-- (UIImage *)compressImage:(UIImage *)image toMaxFileSize:(NSInteger)maxFileSize {
-    CGFloat compression = 0.9f;
-    CGFloat maxCompression = 0.1f;
-    NSData *imageData = UIImageJPEGRepresentation(image, compression);
-    while ([imageData length] > maxFileSize && compression > maxCompression) {
-        compression -= 0.1;
-        imageData = UIImageJPEGRepresentation(image, compression);
-    }
-    
-    UIImage *compressedImage = [UIImage imageWithData:imageData];
-    return compressedImage;
-}
+
 
 -(void)appenReturn
 {
@@ -539,14 +525,7 @@
     
     _textView.attributedText=att;
 }
--(void)insertReturn
-{
-    NSAttributedString * returnStr=[[NSAttributedString alloc]initWithString:@"\n"];
-    NSMutableAttributedString * att=[[NSMutableAttributedString alloc]initWithAttributedString:_textView.attributedText];
-    [att appendAttributedString:returnStr];
-    
-    _textView.attributedText=att;
-}
+
 #pragma mark - Keyboard notification
 
 - (void)onKeyboardNotification:(NSNotification *)notification {
@@ -638,14 +617,33 @@
     for (NSDictionary * dict in content) {
         if (dict[@"image"]!=nil) {
             NSMutableDictionary * imageMutableDict=[NSMutableDictionary dictionaryWithDictionary:[self imageUrlRX:dict[@"image"]]];
+
             [imageMutableDict setObject:[NSNumber numberWithInteger:mutableAttributedStr.length] forKey:@"locLenght"];
             [imageArr addObject:imageMutableDict];
             self.apperImageNum++;
+            
+//            //默认图片
+
+//            [mutableAttributedStr appendAttributedString:[[NSAttributedString alloc]initWithString:@"\n"]];
+            
+            UIImage * image=[UIImage imageNamed:@"richtext_image"];
+            CGFloat ImgeHeight=image.size.height*IMAGE_MAX_SIZE/image.size.width;
+            if (ImgeHeight>IMAGE_MAX_SIZE*2) {
+                ImgeHeight=IMAGE_MAX_SIZE*2;
+            }
+            
+            ImageTextAttachment *imageTextAttachment = [ImageTextAttachment new];
+            imageTextAttachment.image =image;
+            
+            //Set image size
+            imageTextAttachment.imageSize = CGSizeMake(IMAGE_MAX_SIZE, ImgeHeight);
+ 
+                //Insert image image
+                [mutableAttributedStr insertAttributedString:[NSAttributedString attributedStringWithAttachment:imageTextAttachment]
+                                                      atIndex:mutableAttributedStr.length];
             continue;
         }
-//        if ([dict[@"title"] isEqualToString: @"\n"]) {
-//            continue;
-//        }
+
         NSString * plainStr=dict[@"title"];
         NSMutableAttributedString * attrubuteStr=[[NSMutableAttributedString alloc]initWithString:plainStr];
         //设置初始内容
@@ -654,12 +652,12 @@
         
         //是否加粗
         if ([dict[@"bold"] boolValue]) {
-            NSDictionary *attributes =[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:[dict[@"font"] floatValue] ],NSFontAttributeName,[UIColor colorWithString:dict[@"color"]],NSForegroundColorAttributeName,paragraphStyle,NSParagraphStyleAttributeName,nil ];
+            NSDictionary *attributes =[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:[dict[@"font"] floatValue] ],NSFontAttributeName,[UIColor colorWithHexString:dict[@"color"]],NSForegroundColorAttributeName,paragraphStyle,NSParagraphStyleAttributeName,nil ];
             [attrubuteStr addAttributes:attributes range:NSMakeRange(0, attrubuteStr.length)];
         }
         else
         {
-            NSDictionary *attributes =[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:[dict[@"font"] floatValue]],NSFontAttributeName,[UIColor colorWithString:dict[@"color"]],NSForegroundColorAttributeName,paragraphStyle,NSParagraphStyleAttributeName,nil ];
+            NSDictionary *attributes =[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:[dict[@"font"] floatValue]],NSFontAttributeName,[UIColor colorWithHexString:dict[@"color"]],NSForegroundColorAttributeName,paragraphStyle,NSParagraphStyleAttributeName,nil ];
             [attrubuteStr addAttributes:attributes range:NSMakeRange(0, attrubuteStr.length)];
         }
 
@@ -668,32 +666,26 @@
     }
     
     self.textView.attributedText =mutableAttributedStr;
-    
-    NSLog(@"mutableAttributedStr.length---%lu",(unsigned long)mutableAttributedStr.length);
-    
+
+
     //没有图片需要下载
     if (self.apperImageNum==0) {
         return;
     }
 
+    NSLog(@"需要下载的图片－－%lu张，数组－%lu",(unsigned long)self.apperImageNum,(unsigned long)imageArr.count);
     self.finishImageNum=0;
 
     NSUInteger locLength=0;
     //替换带有图片标签的,设置图片
     for (int i=0; i<imageArr.count; i++) {
-        
-//        NSString * locStr=[strArr objectAtIndex:i];
-//        locLength+=locStr.length;
        NSDictionary * imageDict=[imageArr objectAtIndex:i];
        locLength=[imageDict[@"locLenght"]integerValue] ;
-        locLength+=i;
-            //只取第一个
-        
-            [self downLoadImageWithUrl:(NSString *)imageDict[@"src"]                                                                                                                                                    WithRange:NSMakeRange(locLength, 0)];
- 
-        NSLog(@"locLength--%lu",(unsigned long)locLength);
         //完成之后，纪录的位置移动1,图片长度为1
-        
+//        locLength+=i;
+        //只取第一个
+        [self downLoadImageWithUrl:(NSString *)imageDict[@"src"]                                                                                                                                                    WithRange:NSMakeRange(locLength, 1)];
+
     }
     
     //设置光标到末尾
@@ -714,7 +706,7 @@
         if(finished)
         {
             self.finishImageNum++;
-            
+             NSLog(@"下载图片成功");
             if (self.finishImageNum==self.apperImageNum) {
                   NSLog(@"下载图片完成");
             }
@@ -727,6 +719,10 @@
             
             
             
+        }
+        else
+        {
+            NSLog(@"下载图片失败");
         }
     }];
     

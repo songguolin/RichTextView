@@ -4,7 +4,7 @@
 //
 //  Created by     songguolin on 16/1/7.
 //  Copyright © 2016年 innos-campus. All rights reserved.
-//
+//  https://github.com/songguolin/RichTextView
 
 #import "ViewController.h"
 #import "RichTextViewController.h"
@@ -21,46 +21,26 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 }
-//列表显示富文本
-- (IBAction)viewText:(id)sender {
-}
 
-//编辑富文本
-- (IBAction)edtingText:(id)sender {
-    
-    //.1 从服务器得到数据，jsonString
-    
-    
-    RichTextViewController * ctrl=[RichTextViewController ViewController];
-    //设置内容
-    [ctrl setContent:[NSArray arrayWithJSON:jsonString]];
-    
-    __weak typeof(self) weakSelf=self;
-    //    无需返回网页
-    ctrl.finished=^(NSArray * content,NSArray * imageArr){
+//富文本编辑里面的图片都是调整了显示大小的，毕竟不能让图片影响到编辑，但是图片没有压缩过，不用担心失真
+//编辑富文本，这种方式图片全部重新上传，网络不佳的情况不建议
 
-        [weakSelf uploadData:content withImageArray:imageArr];
-
-        [weakSelf.navigationController popViewControllerAnimated:YES];
-    };
-    [self.navigationController pushViewController:ctrl animated:YES];
-}
-//生成 上传富文本
+//生成 上传富文本,注意初次编辑 和以后的
 - (IBAction)richtext:(id)sender {
     RichTextViewController * ctrl=[RichTextViewController ViewController];
-    
+
    //    需要返回的是网页
    //    ctrl.RTDelegate=self;
    //    ctrl.feedbackHtml=YES;
     
-
+    //设置内容
+    [ctrl setContent:[NSArray arrayWithJSON:jsonString]];
     __weak typeof(self) weakSelf=self;
    //    无需返回网页
     ctrl.finished=^(NSArray * content,NSArray * imageArr){
       
         [weakSelf uploadData:content withImageArray:imageArr];
 
-        
 //        if (arr.count>0) {
 //            for (NSDictionary * dict in arr) {
 //                NSLog(@"title---%@",[dict objectForKey:@"title"]);
@@ -126,33 +106,49 @@
     }
     )
 
-      这个时候重新组装数据，吧image替换成url
+      
+    这个时候重新组装数据，吧image替换成url
+
+    来代替的图片地址
+    http://pic32.nipic.com/20130829/12906030_124355855000_2.png
+    http://pic55.nipic.com/file/20141208/19462408_171130083000_2.jpg
+    http://pic36.nipic.com/20131217/6704106_233034463381_2.jpg
+    http://img05.tooopen.com/images/20140604/sy_62331342149.jpg
+    http://img05.tooopen.com/images/20150531/tooopen_sy_127457023651.jpg
+    http://pic44.nipic.com/20140721/11624852_001107119409_2.jpg
 
     */
     
-    for (NSDictionary * dict in dataArr) {
-        if (dict[@"image"]!=nil) {
-            //这个是为了图片加载的时候有个默认 宽高
-            
-            [dict setValue:@"<img src=\"http://viewfile.innos-campus.com/Image/500089/20160601/17513249e9fd82.jpeg\" w=\"240\" h=\"321\"/>" forKey:@"image"];
-          
+    
+    //比如这是服务器返回的数据
+    NSArray * urlarr=@[@"<img src=\"http://pic32.nipic.com/20130829/12906030_124355855000_2.png\" w=\"240\" h=\"321\"/>",
+                       @"<img src=\"http://pic55.nipic.com/file/20141208/19462408_171130083000_2.jpg\" w=\"240\" h=\"321\"/>",
+                       @"<img src=\"http://pic36.nipic.com/20131217/6704106_233034463381_2.jpg\" w=\"240\" h=\"321\"/>",
+                       @"<img src=\"http://img05.tooopen.com/images/20140604/sy_62331342149.jpg\" w=\"240\" h=\"321\"/>",
+                       @"<img src=\"http://img05.tooopen.com/images/20150531/tooopen_sy_127457023651.jpg\" w=\"240\" h=\"321\"/>",
+                       @"<img src=\" http://pic44.nipic.com/20140721/11624852_001107119409_2.jpg\" w=\"240\" h=\"321\"/>"
+                      ];
+   
+    
+    
+    dispatch_queue_t queue=dispatch_queue_create("com.innos", NULL);
+    dispatch_sync(queue, ^{
+        //组装数据
+        for (int i=0; i<dataArr.count;i++ ) {
+            NSDictionary * dict=dataArr[i];
+            if (dict[@"image"]!=nil) {
+                //这个是为了图片加载的时候有个默认 宽高
+                
+                [dict setValue:urlarr[i%6] forKey:@"image"];
+                NSLog(@"图片比对地址－－－%@",urlarr[i%6]);
+            }
         }
-    }
-    //    //根据上传
-    jsonString=[dataArr toJSON];
-    NSLog(@"jsonString--%@",jsonString);
-    
+        //上传服务器
+        jsonString=[dataArr toJSON];
+            NSLog(@"jsonString--%@",jsonString);
 
+    });
     
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        UIAlertController * alert=[UIAlertController alertControllerWithTitle:@"上传成功" message:@"马上进入下载数据页面" preferredStyle:UIAlertControllerStyleAlert];
-//        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-//            [self pushTextViewVC];
-//        }]];
-//    });
-//    
-//    
-//    
 
     
 }
