@@ -30,4 +30,11 @@
  *  @return NSString
  */
 -(NSString *)RXToString;
+
+/**
+ *  富文本 按照图片标示 分隔成字符串数组
+ *
+ *  @return NSArray
+ */
+-(NSArray *)RXToStringArray;
 @end

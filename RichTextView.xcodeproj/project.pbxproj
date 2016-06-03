@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		DE1FF66A1D001384005F8020 /* UIColor+HEX.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1FF6691D001384005F8020 /* UIColor+HEX.m */; };
 		DE3638AF1D01457C001D5DFE /* NSString+Regular.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3638AE1D01457C001D5DFE /* NSString+Regular.m */; };
+		DE3638B31D015111001D5DFE /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3638B21D015111001D5DFE /* TableViewController.m */; };
+		DE3638B71D01515F001D5DFE /* RichTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3638B61D01515F001D5DFE /* RichTableViewCell.m */; };
+		DE3638BA1D015284001D5DFE /* RichTextModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3638B91D015284001D5DFE /* RichTextModel.m */; };
+		DE3638BD1D016259001D5DFE /* NSString+CaclSize.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3638BC1D016259001D5DFE /* NSString+CaclSize.m */; };
 		DE67C4A11CFEC5BF000D0B36 /* NSJSON+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = DE67C4A01CFEC5BF000D0B36 /* NSJSON+Extension.m */; };
 		DE67C4C81CFED135000D0B36 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = DE67C4AA1CFED135000D0B36 /* NSData+ImageContentType.m */; };
 		DE67C4C91CFED135000D0B36 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = DE67C4AC1CFED135000D0B36 /* SDImageCache.m */; };
@@ -63,6 +67,14 @@
 		DE3638AD1D01457C001D5DFE /* NSString+Regular.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Regular.h"; sourceTree = "<group>"; };
 		DE3638AE1D01457C001D5DFE /* NSString+Regular.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Regular.m"; sourceTree = "<group>"; };
 		DE3638B01D01469D001D5DFE /* MacroDefinition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MacroDefinition.h; sourceTree = "<group>"; };
+		DE3638B11D015111001D5DFE /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		DE3638B21D015111001D5DFE /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		DE3638B51D01515F001D5DFE /* RichTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RichTableViewCell.h; sourceTree = "<group>"; };
+		DE3638B61D01515F001D5DFE /* RichTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RichTableViewCell.m; sourceTree = "<group>"; };
+		DE3638B81D015284001D5DFE /* RichTextModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RichTextModel.h; sourceTree = "<group>"; };
+		DE3638B91D015284001D5DFE /* RichTextModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RichTextModel.m; sourceTree = "<group>"; };
+		DE3638BB1D016259001D5DFE /* NSString+CaclSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CaclSize.h"; sourceTree = "<group>"; };
+		DE3638BC1D016259001D5DFE /* NSString+CaclSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CaclSize.m"; sourceTree = "<group>"; };
 		DE67C49F1CFEC5BF000D0B36 /* NSJSON+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSJSON+Extension.h"; path = "../../NSJSON+Extension.h"; sourceTree = "<group>"; };
 		DE67C4A01CFEC5BF000D0B36 /* NSJSON+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSJSON+Extension.m"; path = "../../NSJSON+Extension.m"; sourceTree = "<group>"; };
 		DE67C4A91CFED135000D0B36 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -149,6 +161,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DE3638B41D01511B001D5DFE /* 列表展示1 */ = {
+			isa = PBXGroup;
+			children = (
+				DE3638B11D015111001D5DFE /* TableViewController.h */,
+				DE3638B21D015111001D5DFE /* TableViewController.m */,
+				DE3638B51D01515F001D5DFE /* RichTableViewCell.h */,
+				DE3638B61D01515F001D5DFE /* RichTableViewCell.m */,
+				DE3638B81D015284001D5DFE /* RichTextModel.h */,
+				DE3638B91D015284001D5DFE /* RichTextModel.m */,
+				DE3638BB1D016259001D5DFE /* NSString+CaclSize.h */,
+				DE3638BC1D016259001D5DFE /* NSString+CaclSize.m */,
+			);
+			name = "列表展示1";
+			sourceTree = "<group>";
+		};
 		DE67C4A51CFED135000D0B36 /* SDWebImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -233,6 +260,7 @@
 				DE70FDE11C3E2FD900540EE7 /* ViewController.m */,
 				DE3638B01D01469D001D5DFE /* MacroDefinition.h */,
 				DE67C4D71CFED1DC000D0B36 /* PrefixHeader.pch */,
+				DE3638B41D01511B001D5DFE /* 列表展示1 */,
 				DE70FDE31C3E2FD900540EE7 /* Main.storyboard */,
 				DE70FDE61C3E2FD900540EE7 /* Assets.xcassets */,
 				DE70FDE81C3E2FD900540EE7 /* LaunchScreen.storyboard */,
@@ -437,12 +465,16 @@
 				DE1FF66A1D001384005F8020 /* UIColor+HEX.m in Sources */,
 				DE67C4C81CFED135000D0B36 /* NSData+ImageContentType.m in Sources */,
 				DE3638AF1D01457C001D5DFE /* NSString+Regular.m in Sources */,
+				DE3638B31D015111001D5DFE /* TableViewController.m in Sources */,
 				DE6D51C91CCF4B43006B0E9B /* NSAttributedString+html.m in Sources */,
 				DE67C4D41CFED135000D0B36 /* UIImageView+WebCache.m in Sources */,
 				DE67C4D01CFED135000D0B36 /* UIButton+WebCache.m in Sources */,
+				DE3638B71D01515F001D5DFE /* RichTableViewCell.m in Sources */,
 				DE67C4CD1CFED135000D0B36 /* SDWebImageDownloaderOperation.m in Sources */,
 				DE70FE171C3E311600540EE7 /* NSAttributedString+RichText.m in Sources */,
+				DE3638BA1D015284001D5DFE /* RichTextModel.m in Sources */,
 				DE67C4CA1CFED135000D0B36 /* SDWebImageCompat.m in Sources */,
+				DE3638BD1D016259001D5DFE /* NSString+CaclSize.m in Sources */,
 				DE67C4D51CFED135000D0B36 /* UIView+WebCacheOperation.m in Sources */,
 				DE67C4D21CFED135000D0B36 /* UIImage+MultiFormat.m in Sources */,
 				DE70FDDF1C3E2FD900540EE7 /* AppDelegate.m in Sources */,

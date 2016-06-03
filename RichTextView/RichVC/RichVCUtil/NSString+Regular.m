@@ -82,5 +82,25 @@
     return rxString;
     
 }
-
+//分隔成字符串数组
+-(NSArray *)RXToStringArray
+{
+    NSString *pattern = @"<img src=\"([^\\s]*)\" w=\"([^\\s]*)\" h=\"([^\\s]*)\"\\s*/>";
+    
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:nil];
+    
+    
+    
+    NSString *rxString = [regex stringByReplacingMatchesInString:self
+                                                         options:0
+                                                           range:NSMakeRange(0, [self length])
+                                                    withTemplate:RICHTEXT_IMAGE];
+    
+    
+    
+    //    //这里是把字符串分割成数组，
+    NSArray * strArr=[rxString  componentsSeparatedByString:RICHTEXT_IMAGE];
+    return strArr;
+    
+}
 @end

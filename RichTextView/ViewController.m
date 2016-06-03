@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "RichTextViewController.h"
-
+#import "TableViewController.h"
 
 #define ImageTag (@"[UIImageView]")
 @interface ViewController ()<RichTextViewControllerDelegate>
@@ -227,6 +227,18 @@
     //这个显示就看大家怎么处理了
     [self.webView loadHTMLString:htmlStr baseURL:nil];
     
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    //1.如果是 changText＝NO
+    UIViewController * ctrl=segue.destinationViewController;
+    if ([ctrl isKindOfClass:[TableViewController class]]) {
+
+        TableViewController * table=(TableViewController *)ctrl;
+        table.jsonString=jsonString;
+       
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

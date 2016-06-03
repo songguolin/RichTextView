@@ -132,6 +132,9 @@
     
     self.locationStr=nil;
     self.locationStr=[[NSMutableAttributedString alloc]initWithAttributedString:self.textView.attributedText];
+    if (self.textView.textStorage.length>0) {
+        self.placeholderLabel.hidden=YES;
+    }
    
     
 }
@@ -442,7 +445,12 @@
 #pragma mark - image picker delegte
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-   [self appenReturn];
+
+    //如果没有内容就输入图片，无需换行
+    if (self.textView.textStorage.length>0) {
+         [self appenReturn];
+    }
+  
     [picker dismissViewControllerAnimated:YES completion:^{}];
     
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
@@ -469,6 +477,8 @@
 {
     
  
+    
+    
     UIImage * image=img;
     
     if (image == nil)
