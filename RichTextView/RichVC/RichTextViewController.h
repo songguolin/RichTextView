@@ -17,7 +17,7 @@
 
 
 
-typedef void (^inputFinished)(NSArray *  content,NSArray * imageArr);
+typedef void (^inputFinished)(id  content,NSArray * imageArr);
 typedef NSArray *(^uploadCompelte)(void);
 
 IB_DESIGNABLE
@@ -35,13 +35,15 @@ IB_DESIGNABLE
 @property (nonatomic,copy) IBInspectable NSString * placeholderText;
 //是否返回的是网页，是的话请实现 代理方法
 @property (nonatomic,assign) BOOL feedbackHtml;
-//这一种是返回
+//需要改变字体 颜色，大小，加粗
+@property (nonatomic,assign) BOOL changText;
+
 @property (nonatomic,copy) inputFinished finished;
 
 //初始化页面
 +(instancetype)ViewController;
 //
 ////编辑富文本，设置内容
-//-(void)setContent:(NSArray *)content;
-@property (nonatomic,strong) NSArray * content;
+
+@property (nonatomic,strong) id content;
 @end

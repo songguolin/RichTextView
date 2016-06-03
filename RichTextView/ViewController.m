@@ -9,6 +9,8 @@
 #import "ViewController.h"
 #import "RichTextViewController.h"
 
+
+#define ImageTag (@"[UIImageView]")
 @interface ViewController ()<RichTextViewControllerDelegate>
 {
     NSString * jsonString;
@@ -28,16 +30,23 @@
 //生成 上传富文本,注意初次编辑 和以后的
 - (IBAction)richtext:(id)sender {
     RichTextViewController * ctrl=[RichTextViewController ViewController];
+    ctrl.changText=NO;
 
-   //    需要返回的是网页
-   //    ctrl.RTDelegate=self;
-   //    ctrl.feedbackHtml=YES;
     
-    //设置内容
-    [ctrl setContent:[NSArray arrayWithJSON:jsonString]];
+    if (ctrl.changText) {
+        //设置内容,因为有字体颜色 上传用的是数组
+        [ctrl setContent:[NSArray arrayWithJSON:jsonString]];
+
+    }
+    else
+    {
+        //设置内容
+        ctrl.content=jsonString;
+    }
+
     __weak typeof(self) weakSelf=self;
    //    无需返回网页
-    ctrl.finished=^(NSArray * content,NSArray * imageArr){
+    ctrl.finished=^(id content,NSArray * imageArr){
       
         [weakSelf uploadData:content withImageArray:imageArr];
 
@@ -55,7 +64,7 @@
     [self.navigationController pushViewController:ctrl animated:YES];
 }
 
-- (void)uploadData:(NSArray *)dataArr withImageArray:(NSArray *)imageArr
+- (void)uploadData:(id )contentData withImageArray:(NSArray *)imageArr
 {
     //这是选择完图片一次性上传，可能会慢,.另一种就是在用户选择图片的时候就上传，这种方法大家可以考虑
    //1.先上传图片
@@ -131,25 +140,58 @@
    
     
     
-    dispatch_queue_t queue=dispatch_queue_create("com.innos", NULL);
-    dispatch_sync(queue, ^{
-        //组装数据
-        for (int i=0; i<dataArr.count;i++ ) {
-            NSDictionary * dict=dataArr[i];
-            if (dict[@"image"]!=nil) {
-                //这个是为了图片加载的时候有个默认 宽高
-                
-                [dict setValue:urlarr[i%6] forKey:@"image"];
-                NSLog(@"图片比对地址－－－%@",urlarr[i%6]);
-            }
-        }
-        //上传服务器
-        jsonString=[dataArr toJSON];
-            NSLog(@"jsonString--%@",jsonString);
-
-    });
+//    
+//    //1.如果是带有字体颜色，大小
+//    NSArray * dataArr=(NSArray *)contentData;
+//    dispatch_queue_t queue=dispatch_queue_create("com.innos", NULL);
+//    dispatch_sync(queue, ^{
+//        //组装数据
+//        for (int i=0; i<dataArr.count;i++ ) {
+//            NSDictionary * dict=dataArr[i];
+//            if (dict[@"image"]!=nil) {
+//                //这个是为了图片加载的时候有个默认 宽高
+//                
+//                [dict setValue:urlarr[i%6] forKey:@"image"];
+//                NSLog(@"图片比对地址－－－%@",urlarr[i%6]);
+//            }
+//        }
+//        //上传服务器
+//        jsonString=[dataArr toJSON];
+//            NSLog(@"jsonString--%@",jsonString);
+//
+//    });
     
+    
+    //2.如果只有普通字体，图片
+    //这里是把字符串分割成数组，
+    NSArray * strArr=[contentData  componentsSeparatedByString:ImageTag];
+    //            NSLog(@"strArr.count--%lu,picArr.count---%lu",(unsigned long)strArr.count,(unsigned long)picArr.count);
+    
+    
+    NSString * newContent=@"";
+    for (int i=0; i<strArr.count; i++) {
 
+        NSString * imgTag=@"";
+        if (i<strArr.count-1) {
+            //这是用url 地址替换 图片标示 imgTag=urlarr[i];
+            imgTag=urlarr[i%6];
+        }
+        else
+        {
+            
+        }
+        
+        
+        //因为cutstr 可能是null
+        NSString * cutStr=[strArr objectAtIndex:i];
+        newContent=[NSString stringWithFormat:@"%@%@%@",newContent,cutStr,imgTag];
+        
+    }
+
+    
+    //上传服务器
+    jsonString=newContent;
+    NSLog(@"jsonString--%@",jsonString);
     
 }
 

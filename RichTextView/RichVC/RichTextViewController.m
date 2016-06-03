@@ -15,11 +15,10 @@
 #import "NSAttributedString+RichText.h"
 #import "PictureModel.h"
 #import "NSAttributedString+html.h"
-
+#import "NSString+Regular.h"
 //Image default max size，图片显示的最大宽度
 #define IMAGE_MAX_SIZE (100)
 
-#define ImageTag (@"[UIImageView]")
 #define DefaultFont (16)
 #define MaxLength (2000)
 
@@ -72,9 +71,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    //如果无需改变字体 颜色 大小
+    if (!self.changText) {
+        self.fontBtn.hidden=YES;
+        self.colorBtn.hidden=YES;
+        self.boldBtn.hidden=YES;
+
+    }
     //Init text font
-    
+
     [self resetTextStyle];
 
     //Add keyboard notification
@@ -85,7 +90,7 @@
     
     
     if (self.content!=nil) {
-        [self setContentArr:self.content];
+        [self setRichTextViewContent:self.content];
     }
 }
 
@@ -328,7 +333,15 @@
         //这个是返回数组，每个数组装有不同设置的字符串
         if (self.finished!=nil) {
 
-            self.finished([_textView.attributedText getArrayWithAttributed],[_textView.attributedText getImgaeArray]);
+            if (self.changText) {
+                self.finished([_textView.attributedText getArrayWithAttributed],[_textView.attributedText getImgaeArray]);
+            }
+            else
+            {
+                // *  获取带有图片标示的一个普通字符串
+                self.finished([_textView.attributedText getPlainString],[_textView.attributedText getImgaeArray]);
+            }
+            
             
         }
  
@@ -480,7 +493,7 @@
     ImageTextAttachment *imageTextAttachment = [ImageTextAttachment new];
     
     //Set tag and image
-    imageTextAttachment.imageTag = ImageTag;
+    imageTextAttachment.imageTag = RICHTEXT_IMAGE;
     imageTextAttachment.image =image;
     
     //Set image size
@@ -557,7 +570,7 @@
                         usingBlock:^(id value, NSRange range, BOOL *stop) {
                             if (value && [value isKindOfClass:[ImageTextAttachment class]]) {
 
-                                [contentStr replaceCharactersInRange:range withString:ImageTag];
+                                [contentStr replaceCharactersInRange:range withString:RICHTEXT_IMAGE];
 
                             }
                         }];
@@ -566,7 +579,7 @@
     NSMutableString * mutableStr=[[NSMutableString alloc]initWithString:[contentStr toHtmlString]];
     
     //这里是把字符串分割成数组，
-    NSArray * strArr=[mutableStr  componentsSeparatedByString:ImageTag];
+    NSArray * strArr=[mutableStr  componentsSeparatedByString:RICHTEXT_IMAGE];
 
 
     NSString * newContent=@"";
@@ -598,6 +611,105 @@
 }
 
 #pragma mark  设置内容
+-(void)setRichTextViewContent:(id)content
+{
+    
+    
+    if ([content isKindOfClass:[NSString class]]) {
+        if (self.content!=nil) {
+
+            NSMutableArray * modelArr=[NSMutableArray array];
+            NSArray * imageOfWH=[content RXToArray];
+            
+            if (modelArr!=nil) {
+                [modelArr removeAllObjects];
+            }
+            //获取字符串中的图片
+            for (NSDictionary * dict in imageOfWH) {
+                if ([dict isKindOfClass:[NSDictionary class]]) {
+                    
+                    PictureModel * model=[[PictureModel alloc]init];
+                    model.imageurl=dict[@"src"];
+                    model.width=[dict[@"w"] floatValue];;
+                    model.height=[dict[@"h"] floatValue];
+                    [modelArr addObject:model];
+                }
+            }
+            
+            [self setContentStr:[content RXToString] withImageArr:modelArr];
+        }
+        
+ 
+
+    }
+    else
+    {
+        [self setContentArr:(NSArray *)content];
+    }
+}
+-(void)setContentStr:(NSString *)contentStr withImageArr:(NSArray *)imageArr
+{
+    
+    if (contentStr.length<=0) {
+        self.placeholderLabel.hidden=NO;
+        return;
+    }
+    self.placeholderLabel.hidden=YES;
+    
+
+    //1.显示文字内容
+    NSMutableString * mutableStr=[[NSMutableString alloc]initWithString:contentStr];
+    
+    
+    NSString * plainStr=[mutableStr stringByReplacingOccurrencesOfString:RICHTEXT_IMAGE withString:@"\n"];
+    NSMutableAttributedString * attrubuteStr=[[NSMutableAttributedString alloc]initWithString:plainStr];
+    //设置初始内容
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineSpacing = self.lineSapce;// 字体的行间距
+    
+    NSDictionary *attributes =[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:self.font],NSFontAttributeName,self.fontColor,NSForegroundColorAttributeName,paragraphStyle,NSParagraphStyleAttributeName,nil ];
+    [attrubuteStr addAttributes:attributes range:NSMakeRange(0, attrubuteStr.length)];
+    self.textView.attributedText =attrubuteStr;
+    
+    
+    if (imageArr.count==0) {
+        return;
+    }
+    
+    self.apperImageNum=imageArr.count;
+    self.finishImageNum=0;
+    
+    
+    //2.这里是把字符串分割成数组，
+    NSArray * strArr=[contentStr  componentsSeparatedByString:RICHTEXT_IMAGE];
+    NSUInteger locLength=0;
+    //替换带有图片标签的,设置图片
+    for (int i=0; i<imageArr.count; i++) {
+        
+        NSString * locStr=[strArr objectAtIndex:i];
+        locLength+=locStr.length;
+        id image=[imageArr objectAtIndex:i];
+        if ([image isKindOfClass:[UIImage class]]) {
+         
+            [self setImageText:image withRange:NSMakeRange(locLength+i, 1) appenReturn:NO];
+        }
+        else if([image isKindOfClass:[PictureModel class]])
+        {
+            PictureModel * model=(PictureModel *)image;
+            [self downLoadImageWithUrl:model.imageurl                                                                                                                                                    WithRange:NSMakeRange(locLength+i, 1)];
+        }
+        else if([image isKindOfClass:[NSString class]])
+        {
+            [self downLoadImageWithUrl:(NSString *)image                                                                                                                                                    WithRange:NSMakeRange(locLength+i, 1)];
+        }
+
+    }
+    
+    //设置光标到末尾
+    self.textView.selectedRange=NSMakeRange(self.textView.attributedText.length, 0);
+    
+    
+}
 
 -(void)setContentArr:(NSArray *)content
 {
@@ -616,15 +728,13 @@
     NSMutableAttributedString * mutableAttributedStr=[[NSMutableAttributedString alloc]init];
     for (NSDictionary * dict in content) {
         if (dict[@"image"]!=nil) {
-            NSMutableDictionary * imageMutableDict=[NSMutableDictionary dictionaryWithDictionary:[self imageUrlRX:dict[@"image"]]];
+            NSMutableDictionary * imageMutableDict=[NSMutableDictionary dictionaryWithDictionary:[dict[@"image"] RXImageUrl]];
 
             [imageMutableDict setObject:[NSNumber numberWithInteger:mutableAttributedStr.length] forKey:@"locLenght"];
             [imageArr addObject:imageMutableDict];
             self.apperImageNum++;
             
-//            //默认图片
-
-//            [mutableAttributedStr appendAttributedString:[[NSAttributedString alloc]initWithString:@"\n"]];
+            //默认图片
             
             UIImage * image=[UIImage imageNamed:@"richtext_image"];
             CGFloat ImgeHeight=image.size.height*IMAGE_MAX_SIZE/image.size.width;
@@ -673,7 +783,7 @@
         return;
     }
 
-    NSLog(@"需要下载的图片－－%lu张，数组－%lu",(unsigned long)self.apperImageNum,(unsigned long)imageArr.count);
+   
     self.finishImageNum=0;
 
     NSUInteger locLength=0;
@@ -706,9 +816,9 @@
         if(finished)
         {
             self.finishImageNum++;
-             NSLog(@"下载图片成功");
+        
             if (self.finishImageNum==self.apperImageNum) {
-                  NSLog(@"下载图片完成");
+                
             }
           
             [[SDWebImageManager sharedManager] saveImageToCache:image forURL:[NSURL URLWithString:url]];
@@ -722,38 +832,11 @@
         }
         else
         {
-            NSLog(@"下载图片失败");
+           
         }
     }];
     
 }
-//输出正则里面的内容//输出正则里面的内容
--(NSDictionary *)imageUrlRX:(NSString *)string
-{
-    NSString *pattern = @"<img src=\"([^\\s]*)\" w=\"([^\\s]*)\" h=\"([^\\s]*)\"\\s*/>";
-    NSRegularExpression *expression = [NSRegularExpression regularExpressionWithPattern:pattern
-                                                                                options:0
-                                                                                  error:NULL];
-    NSArray *lines = [expression matchesInString:string options:0 range:NSMakeRange(0, string.length)];
-    
-    NSMutableArray * resultArr=[NSMutableArray array];
-    for (NSTextCheckingResult *textCheckingResult in lines) {
-        NSMutableDictionary *result = [NSMutableDictionary dictionary];
-        
-        //0 代表整个正则内容
-        NSString* value1 = [string substringWithRange:[textCheckingResult rangeAtIndex:1]];
-        NSString* value2 = [string substringWithRange:[textCheckingResult rangeAtIndex:2]];
-        NSString* value3 = [string substringWithRange:[textCheckingResult rangeAtIndex:3]];
-        
-        result[@"src"] = value1;
-        result[@"w"] = value2;
-        result[@"h"] = value3;
-        [resultArr addObject:result];
-        
-    }
-    
-    
-    return resultArr.firstObject;
-}
+
 
 @end

@@ -14,4 +14,7 @@
 #import "SDImageCache.h"
 #import "PictureModel.h"
 #import "NSJSON+Extension.h"
+#import "MacroDefinition.h"
+
+
 #endif /* PrefixHeader_pch */

@@ -96,7 +96,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.93965871710000004" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="JOh-yg-eVq" firstAttribute="height" secondItem="NMf-SD-BlE" secondAttribute="height" id="1la-Ly-Tyy"/>
                                     <constraint firstItem="4fI-0i-Nlq" firstAttribute="width" secondItem="NMf-SD-BlE" secondAttribute="width" id="31H-Oa-KaF"/>
