@@ -11,6 +11,12 @@
 @protocol RichTextViewControllerDelegate <NSObject>
 
 @optional
+/**
+ *  得到网页
+ *
+ *  @param imageArr   要上传的图片数组
+ *  @param completion 传入urlArray 服务器返回的图片地址，返回网页NSString
+ */
 -(void)uploadImageArray:(NSArray *)imageArr withCompletion:(NSString * (^)(NSArray * urlArray))completion;
 
 @end
@@ -42,8 +48,7 @@ IB_DESIGNABLE
 
 //初始化页面
 +(instancetype)ViewController;
-//
-////编辑富文本，设置内容
 
+////编辑富文本，设置内容
 @property (nonatomic,strong) id content;
 @end

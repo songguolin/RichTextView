@@ -16,5 +16,5 @@
 #import "NSJSON+Extension.h"
 #import "MacroDefinition.h"
 #import "UIImageView+WebCache.h"
-
+#import "MJExtension.h"
 #endif /* PrefixHeader_pch */

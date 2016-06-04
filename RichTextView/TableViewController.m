@@ -21,11 +21,15 @@ static NSString *indentifireCell=@"RichTableViewCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
+    
+    //    self.jsonString 比如这是服务器返回的数据
+    
     self.info=[[RichTextModel alloc]init];
     self.info.content=self.jsonString;
     [self.myTableView reloadData];
-    //这种方式 只支持ios8+；
+   
     self.myTableView.estimatedRowHeight = 40;
+     //这种方式 只支持ios8+；这样就可以不用计算宽高
 //    self.myTableView.rowHeight=UITableViewAutomaticDimension;
 
     

@@ -13,30 +13,8 @@
 //如果使用的是MJExtension
 - (void)mj_keyValuesDidFinishConvertingToObject
 {
-    
-
-    if (self.content!=nil) {
-        self.contentStrArr=[NSMutableArray arrayWithArray:[self.content RXToStringArray]];
-        self.contentStr=[self.content RXToString];
-        
-        self.imageArr=[NSMutableArray array];
-        NSArray * imageOfWH=[self.content RXToArray];
-        
-        if (self.imageArr!=nil) {
-            [self.imageArr removeAllObjects];
-        }
-        //获取字符串中的图片
-        for (NSDictionary * dict in imageOfWH) {
-            if ([dict isKindOfClass:[NSDictionary class]]) {
-                
-                PictureModel * model=[[PictureModel alloc]init];
-                model.imageurl=dict[@"src"];
-                model.width=[dict[@"w"] floatValue];;
-                model.height=[dict[@"h"] floatValue];
-                [self.imageArr addObject:model];
-            }
-        }
-    }
+  //下面方法的调用 写在这里
+  
 }
 
 -(void)setContent:(NSString *)content

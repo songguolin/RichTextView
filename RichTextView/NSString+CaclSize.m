@@ -16,7 +16,26 @@
     
     return [self calculateSize:size font:font lineBreakMode:NSLineBreakByWordWrapping];
 }
+- (CGSize)calculateSize:(CGSize)size  attributes:(NSDictionary *)dict
+{
+    CGSize expectedLabelSize = CGSizeZero;
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7)
+    {
 
+        
+        expectedLabelSize = [self boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:dict context:nil].size;
+    }
+    //    else
+    //    {
+    //        expectedLabelSize = [self sizeWithFont:font
+    //                             constrainedToSize:size
+    //                                 lineBreakMode:mode];
+    //
+    //    }
+    
+    return CGSizeMake(ceil(expectedLabelSize.width), ceil(expectedLabelSize.height + 5.0f));
+}
 - (CGSize)calculateSize:(CGSize)size font:(UIFont *)font lineBreakMode:(NSLineBreakMode)mode
 {
     CGSize expectedLabelSize = CGSizeZero;

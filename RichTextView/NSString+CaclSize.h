@@ -15,9 +15,20 @@
  *  @param size
  *  @param font
  *  NSLineBreakByWordWrapping,以单词为单位换行，以单位为单位截断。
- *  @return return value description
+ *  @return  value description
  */
 - (CGSize)calculateSize:(CGSize)size font:(UIFont *)font;
+
+/**
+ *  Description
+ *
+ *  @param size size
+ *  @param font font
+ *  @param dict attributes 属性
+ *
+ *  @return CGSize
+ */
+- (CGSize)calculateSize:(CGSize)size  attributes:(NSDictionary *)dict;
 /**
  *  calculateSize
  *

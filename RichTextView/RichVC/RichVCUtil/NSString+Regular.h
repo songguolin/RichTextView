@@ -11,7 +11,7 @@
 @interface NSString (Regular)
 
 /**
- *  输出正则里面的内容//输出正则里面的内容
+ *  输出正则里面的内容
  *
  *  @return NSDictionary
  */

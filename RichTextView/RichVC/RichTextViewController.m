@@ -310,7 +310,7 @@
     
     
 }
-#pragma mark - Action
+#pragma mark - Action 自定义
 //完成
 - (IBAction)finishClick:(UIButton *)sender {
 
@@ -446,11 +446,8 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
 
-    //如果没有内容就输入图片，无需换行
-    if (self.textView.textStorage.length>0) {
-         [self appenReturn];
-    }
-  
+
+
     [picker dismissViewControllerAnimated:YES completion:^{}];
     
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
@@ -466,6 +463,9 @@
     //    // 保存图片至本地，方法见下文
     //    NSLog(@"img = %@",image);
     
+    if (self.textView.textStorage.length>0) {
+        [self appenReturn];
+    }
     //图片添加后 自动换行
     [self setImageText:image withRange:self.textView.selectedRange appenReturn:YES];
     
@@ -620,7 +620,7 @@
     self.placeholderLabel.text=placeholderText;
 }
 
-#pragma mark  设置内容
+#pragma mark  设置内容，二次编辑
 -(void)setRichTextViewContent:(id)content
 {
     
