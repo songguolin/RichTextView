@@ -14,7 +14,7 @@
          NSTextAttachment：字符串的附件，将图片，可以将图片等内容当做一个附件插入到属性字符串中，可以实现表情混排，链接等效果.
 ## 详细介绍连接
         
-[Markdown](http://www.jianshu.com/writer#/notebooks/3406078/notes/3106862)
+[思路解析](http://www.jianshu.com/writer#/notebooks/3406078/notes/3106862)
         
 ## 参考文档
         
