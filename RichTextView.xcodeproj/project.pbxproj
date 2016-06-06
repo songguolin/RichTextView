@@ -57,6 +57,9 @@
 		DE70FE171C3E311600540EE7 /* NSAttributedString+RichText.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE161C3E311600540EE7 /* NSAttributedString+RichText.m */; };
 		DE70FE1C1C3E331A00540EE7 /* RichText.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE70FE1B1C3E331A00540EE7 /* RichText.storyboard */; };
 		DE70FE221C3E366E00540EE7 /* RichTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE70FE211C3E366E00540EE7 /* RichTextViewController.m */; };
+		DE80B5CB1D052A1F00A53F70 /* ArchiveFile.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80B5CA1D052A1F00A53F70 /* ArchiveFile.m */; };
+		DE80B5D31D05474400A53F70 /* ViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80B5D21D05474400A53F70 /* ViewController1.m */; };
+		DE80B5D61D05475100A53F70 /* ViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80B5D51D05475100A53F70 /* ViewController2.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -180,6 +183,13 @@
 		DE70FE1B1C3E331A00540EE7 /* RichText.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = RichText.storyboard; sourceTree = "<group>"; };
 		DE70FE201C3E366E00540EE7 /* RichTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RichTextViewController.h; sourceTree = "<group>"; };
 		DE70FE211C3E366E00540EE7 /* RichTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RichTextViewController.m; sourceTree = "<group>"; };
+		DE80B5C91D052A1F00A53F70 /* ArchiveFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArchiveFile.h; sourceTree = "<group>"; };
+		DE80B5CA1D052A1F00A53F70 /* ArchiveFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArchiveFile.m; sourceTree = "<group>"; };
+		DE80B5CD1D052AF100A53F70 /* utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utility.h; sourceTree = "<group>"; };
+		DE80B5D11D05474400A53F70 /* ViewController1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController1.h; sourceTree = "<group>"; };
+		DE80B5D21D05474400A53F70 /* ViewController1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController1.m; sourceTree = "<group>"; };
+		DE80B5D41D05475100A53F70 /* ViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController2.h; sourceTree = "<group>"; };
+		DE80B5D51D05475100A53F70 /* ViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController2.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -379,11 +389,12 @@
 				DE70FE0D1C3E301A00540EE7 /* RichVC */,
 				DE70FDDD1C3E2FD900540EE7 /* AppDelegate.h */,
 				DE70FDDE1C3E2FD900540EE7 /* AppDelegate.m */,
-				DE70FDE01C3E2FD900540EE7 /* ViewController.h */,
-				DE70FDE11C3E2FD900540EE7 /* ViewController.m */,
 				DE3638B01D01469D001D5DFE /* MacroDefinition.h */,
 				DE67C4D71CFED1DC000D0B36 /* PrefixHeader.pch */,
 				DE49D4031D019DDE0007810D /* categary */,
+				DE80B5CE1D0546F500A53F70 /* 无属性文字 */,
+				DE80B5CF1D05471300A53F70 /* 属性文字 */,
+				DE80B5D01D05472300A53F70 /* 生成网页 */,
 				DE3638B41D01511B001D5DFE /* 列表展示 */,
 				DE49D3D41D018CB40007810D /* 列表展示1 */,
 				DE70FDE31C3E2FD900540EE7 /* Main.storyboard */,
@@ -436,6 +447,14 @@
 			isa = PBXGroup;
 			children = (
 				DE6D51CD1CCF5812006B0E9B /* model */,
+				DE80B5CC1D052A2D00A53F70 /* utility */,
+			);
+			path = RichVCUtil;
+			sourceTree = "<group>";
+		};
+		DE80B5CC1D052A2D00A53F70 /* utility */ = {
+			isa = PBXGroup;
+			children = (
 				DE6D51C71CCF4B43006B0E9B /* NSAttributedString+html.h */,
 				DE6D51C81CCF4B43006B0E9B /* NSAttributedString+html.m */,
 				DE70FE121C3E30A400540EE7 /* ImageTextAttachment.h */,
@@ -444,12 +463,42 @@
 				DE70FE161C3E311600540EE7 /* NSAttributedString+RichText.m */,
 				DE67C49F1CFEC5BF000D0B36 /* NSJSON+Extension.h */,
 				DE67C4A01CFEC5BF000D0B36 /* NSJSON+Extension.m */,
+				DE80B5C91D052A1F00A53F70 /* ArchiveFile.h */,
+				DE80B5CA1D052A1F00A53F70 /* ArchiveFile.m */,
 				DE1FF6681D001384005F8020 /* UIColor+HEX.h */,
 				DE1FF6691D001384005F8020 /* UIColor+HEX.m */,
 				DE3638AD1D01457C001D5DFE /* NSString+Regular.h */,
 				DE3638AE1D01457C001D5DFE /* NSString+Regular.m */,
+				DE80B5CD1D052AF100A53F70 /* utility.h */,
 			);
-			path = RichVCUtil;
+			name = utility;
+			sourceTree = "<group>";
+		};
+		DE80B5CE1D0546F500A53F70 /* 无属性文字 */ = {
+			isa = PBXGroup;
+			children = (
+				DE70FDE01C3E2FD900540EE7 /* ViewController.h */,
+				DE70FDE11C3E2FD900540EE7 /* ViewController.m */,
+			);
+			name = "无属性文字";
+			sourceTree = "<group>";
+		};
+		DE80B5CF1D05471300A53F70 /* 属性文字 */ = {
+			isa = PBXGroup;
+			children = (
+				DE80B5D11D05474400A53F70 /* ViewController1.h */,
+				DE80B5D21D05474400A53F70 /* ViewController1.m */,
+			);
+			name = "属性文字";
+			sourceTree = "<group>";
+		};
+		DE80B5D01D05472300A53F70 /* 生成网页 */ = {
+			isa = PBXGroup;
+			children = (
+				DE80B5D41D05475100A53F70 /* ViewController2.h */,
+				DE80B5D51D05475100A53F70 /* ViewController2.m */,
+			);
+			name = "生成网页";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -599,6 +648,8 @@
 				DE3638B71D01515F001D5DFE /* RichTableViewCell.m in Sources */,
 				DE67C4CD1CFED135000D0B36 /* SDWebImageDownloaderOperation.m in Sources */,
 				DE70FE171C3E311600540EE7 /* NSAttributedString+RichText.m in Sources */,
+				DE80B5D31D05474400A53F70 /* ViewController1.m in Sources */,
+				DE80B5D61D05475100A53F70 /* ViewController2.m in Sources */,
 				DE49D3FC1D0193CD0007810D /* MJPropertyType.m in Sources */,
 				DE2EB0051D02717B00D1E250 /* RichTextViewModel.m in Sources */,
 				DE3638BA1D015284001D5DFE /* RichTextModel.m in Sources */,
@@ -614,6 +665,7 @@
 				DE49D3FA1D0193CD0007810D /* MJProperty.m in Sources */,
 				DE70FE141C3E30A400540EE7 /* ImageTextAttachment.m in Sources */,
 				DE70FE221C3E366E00540EE7 /* RichTextViewController.m in Sources */,
+				DE80B5CB1D052A1F00A53F70 /* ArchiveFile.m in Sources */,
 				DE67C4CC1CFED135000D0B36 /* SDWebImageDownloader.m in Sources */,
 				DE49D3D71D018DA40007810D /* TableViewController1.m in Sources */,
 				DE67C4D31CFED135000D0B36 /* UIImageView+HighlightedWebCache.m in Sources */,

@@ -26,6 +26,12 @@
 typedef void (^inputFinished)(id  content,NSArray * imageArr);
 typedef NSArray *(^uploadCompelte)(void);
 
+typedef NS_ENUM(NSUInteger,RichTextType) {
+    RichTextType_PlainString=0,
+    RichTextType_AttributedString,
+    RichTextType_HtmlString,
+};
+
 IB_DESIGNABLE
 @interface RichTextViewController : UIViewController
 
@@ -39,10 +45,11 @@ IB_DESIGNABLE
 
 //提示字
 @property (nonatomic,copy) IBInspectable NSString * placeholderText;
-//是否返回的是网页，是的话请实现 代理方法
-@property (nonatomic,assign) BOOL feedbackHtml;
-//需要改变字体 颜色，大小，加粗
-@property (nonatomic,assign) BOOL changText;
+//文本类型
+@property (nonatomic,assign) RichTextType textType;
+//缓存数据，加载速度更快，不受网络影响
+@property (nonatomic,assign) BOOL cacheRichText;
+
 
 @property (nonatomic,copy) inputFinished finished;
 

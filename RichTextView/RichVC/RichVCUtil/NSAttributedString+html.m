@@ -20,14 +20,19 @@
     return html;
 }
 
-+(NSAttributedString *)toAttributedString:(NSString *)html
+
+@end
+
+@implementation NSString (html)
+-(NSAttributedString *)toAttributedString
 {
-    
-    NSData * htmlData=[html dataUsingEncoding:NSUTF8StringEncoding];
+    NSData * htmlData=[self dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary * importParams=@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType};
     NSError * error=nil;
     NSAttributedString * htmlString=[[NSAttributedString alloc]initWithData:htmlData options:importParams documentAttributes:NULL error:&error];
     
     return htmlString;
 }
+
+
 @end

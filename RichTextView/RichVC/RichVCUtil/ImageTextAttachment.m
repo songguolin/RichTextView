@@ -10,10 +10,11 @@
 
 @implementation ImageTextAttachment
 - (CGRect)attachmentBoundsForTextContainer:(NSTextContainer *)textContainer proposedLineFragment:(CGRect)lineFrag glyphPosition:(CGPoint)position characterIndex:(NSUInteger)charIndex {
-        return CGRectMake(0, 0, _imageSize.width, _imageSize.height);
     
-//    //调整图片大小
-//    return CGRectMake( 0 , 0 , [[UIScreen mainScreen] bounds].size.width , 80);
+    //    //调整图片大小
+        return CGRectMake(SCREEN_WIDTH/2-_imageSize.width/2, 0, _imageSize.width, _imageSize.height);
+    
+
    
 }
 - (UIImage *)scaleImage:(UIImage *)image withSize:(CGSize)size

@@ -10,12 +10,10 @@
 #import "SDWebImageDownloader.h"
 #import "SDWebImageManager.h"
 
+#import "utility.h"
 
-#import "ImageTextAttachment.h"
-#import "NSAttributedString+RichText.h"
 #import "PictureModel.h"
-#import "NSAttributedString+html.h"
-#import "NSString+Regular.h"
+
 //Image default max size，图片显示的最大宽度
 #define IMAGE_MAX_SIZE (100)
 
@@ -32,14 +30,14 @@
 
 
 //设置
-@property (nonatomic,assign) NSRange newRange;
-@property (nonatomic,strong) NSString * newstr;
+@property (nonatomic,assign) NSRange newRange;     //记录最新内容的range
+@property (nonatomic,strong) NSString * newstr;    //记录最新内容的字符串
 @property (nonatomic,assign) BOOL isBold;          //是否加粗
 @property (nonatomic,strong) UIColor * fontColor;  //字体颜色
 @property (nonatomic,assign) CGFloat  font;        //字体大小
 @property (nonatomic,assign) NSUInteger location;  //纪录变化的起始位置
+//纪录变化时的内容，即是
 @property (nonatomic,strong) NSMutableAttributedString * locationStr;
-
 @property (nonatomic,assign) CGFloat lineSapce;    //行间距
 @property (nonatomic,assign) BOOL isDelete;        //是否是回删
 
@@ -57,6 +55,8 @@
 
 -(void)CommomInit
 {
+    
+    self.cacheRichText=YES;
     self.textView.delegate=self;
     //显示链接，电话
     self.textView.dataDetectorTypes = UIDataDetectorTypeAll;
@@ -72,7 +72,7 @@
     [super viewDidLoad];
     
     //如果无需改变字体 颜色 大小
-    if (!self.changText) {
+    if (self.textType==RichTextType_PlainString) {
         self.fontBtn.hidden=YES;
         self.colorBtn.hidden=YES;
         self.boldBtn.hidden=YES;
@@ -126,6 +126,8 @@
     
     
 }
+
+//把最新内容都赋给self.locationStr
 -(void)setInitLocation
 {
     
@@ -138,10 +140,9 @@
    
     
 }
+//设置样式
 -(void)setStyle
 {
-    
-    
     //把最新的内容进行替换
     [self setInitLocation];
     
@@ -178,6 +179,8 @@
     
     //这里需要把光标的位置重新设定
     self.textView.selectedRange=NSMakeRange(self.newRange.location+self.newRange.length, 0);
+    
+ 
    
 }
 #pragma mark textViewDelegate
@@ -247,15 +250,12 @@
         self.isDelete=NO;
         self.newRange=NSMakeRange(self.textView.selectedRange.location-len, len);
         self.newstr=[textView.text substringWithRange:self.newRange];
-        
     }
     else
     {
         self.isDelete=YES;
         
     }
-
-    
 # warning  如果出现输入问题，检查这里
     bool isChinese;//判断当前输入法是否是中文
 
@@ -266,18 +266,14 @@
     {
         isChinese = true;
     }
-    
     NSString *str = [[ self.textView text] stringByReplacingOccurrencesOfString:@"?" withString:@""];
     if (isChinese) { //中文输入法下
         UITextRange *selectedRange = [ self.textView markedTextRange];
-        
         //获取高亮部分
         UITextPosition *position = [ self.textView positionFromPosition:selectedRange.start offset:0];
         // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
         if (!position) {
 //            NSLog(@"汉字");
-            //              NSLog(@"str=%@; 本次长度=%lu",str,(unsigned long)[str length]);
-            
             [self setStyle];
             if ( str.length>=MaxLength) {
                 NSString *strNew = [NSString stringWithString:str];
@@ -315,7 +311,7 @@
 - (IBAction)finishClick:(UIButton *)sender {
 
 
-    if (self.feedbackHtml) {
+    if (self.textType==RichTextType_HtmlString) {
         if ([self.RTDelegate respondsToSelector:@selector(uploadImageArray:withCompletion:)]) {
             //实现上传图片的代理，用url替换图片标识
             
@@ -329,14 +325,10 @@
     else
     {
 
-        //注意这下面的三种 数据
-
-        //    NSLog(@"attributedText。getPlainString--%@",[_textView.attributedText getPlainString]);
-        //    NSLog(@"attributedText--%@",self.textView.attributedText);
         //这个是返回数组，每个数组装有不同设置的字符串
         if (self.finished!=nil) {
 
-            if (self.changText) {
+            if (self.textType==RichTextType_AttributedString) {
                 self.finished([_textView.attributedText getArrayWithAttributed],[_textView.attributedText getImgaeArray]);
             }
             else
@@ -623,39 +615,70 @@
 #pragma mark  设置内容，二次编辑
 -(void)setRichTextViewContent:(id)content
 {
-    
-    
-    if ([content isKindOfClass:[NSString class]]) {
-        if (self.content!=nil) {
-
-            NSMutableArray * modelArr=[NSMutableArray array];
-            NSArray * imageOfWH=[content RXToArray];
-            
-            if (modelArr!=nil) {
-                [modelArr removeAllObjects];
-            }
-            //获取字符串中的图片
-            for (NSDictionary * dict in imageOfWH) {
-                if ([dict isKindOfClass:[NSDictionary class]]) {
+    switch (_textType) {
+        case RichTextType_PlainString:
+        {
+            if ([content isKindOfClass:[NSString class]]) {
+                if (self.content!=nil) {
                     
-                    PictureModel * model=[[PictureModel alloc]init];
-                    model.imageurl=dict[@"src"];
-                    model.width=[dict[@"w"] floatValue];;
-                    model.height=[dict[@"h"] floatValue];
-                    [modelArr addObject:model];
+                    NSMutableArray * modelArr=[NSMutableArray array];
+                    NSArray * imageOfWH=[content RXToArray];
+                    
+                    if (modelArr!=nil) {
+                        [modelArr removeAllObjects];
+                    }
+                    //获取字符串中的图片
+                    for (NSDictionary * dict in imageOfWH) {
+                        if ([dict isKindOfClass:[NSDictionary class]]) {
+                            
+                            PictureModel * model=[[PictureModel alloc]init];
+                            model.imageurl=dict[@"src"];
+                            model.width=[dict[@"w"] floatValue];;
+                            model.height=[dict[@"h"] floatValue];
+                            [modelArr addObject:model];
+                        }
+                    }
+                    
+                    [self setContentStr:[content RXToString] withImageArr:modelArr];
                 }
             }
-            
-            [self setContentStr:[content RXToString] withImageArr:modelArr];
+            else
+            {
+                NSAssert(NO, @"需要传入字符串");
+            }
         }
-        
- 
+            break;
+        case RichTextType_AttributedString:
+        {
+            if ([content isKindOfClass:[NSArray class]]||[content isKindOfClass:[NSMutableArray class]]) {
+                [self setContentArr:(NSArray *)content];
+            }
+            else
+            {
+                NSAssert(NO, @"需要传入数组");
+            }
+            
+        }
+            break;
+        case RichTextType_HtmlString:
+        {
+            if ([content isKindOfClass:[NSString class]]) {
+                NSString * textStr=(NSString *)content;
+                _textView.attributedText=[textStr toAttributedString];
+            }
+            else
+            {
+                NSAssert(NO, @"需要传入字符串");
+            }
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
+    
 
-    }
-    else
-    {
-        [self setContentArr:(NSArray *)content];
-    }
 }
 -(void)setContentStr:(NSString *)contentStr withImageArr:(NSArray *)imageArr
 {
@@ -801,52 +824,53 @@
     for (int i=0; i<imageArr.count; i++) {
        NSDictionary * imageDict=[imageArr objectAtIndex:i];
        locLength=[imageDict[@"locLenght"]integerValue] ;
-        //完成之后，纪录的位置移动1,图片长度为1
-//        locLength+=i;
         //只取第一个
         [self downLoadImageWithUrl:(NSString *)imageDict[@"src"]                                                                                                                                                    WithRange:NSMakeRange(locLength, 1)];
 
     }
-    
     //设置光标到末尾
     self.textView.selectedRange=NSMakeRange(self.textView.attributedText.length, 0);
-    
-    
 }
 
 -(void)downLoadImageWithUrl:(NSString *)url WithRange:(NSRange)range
 {
     
-    __weak typeof(self) weakSelf=self;
-    SDWebImageDownloader *manager = [SDWebImageDownloader sharedDownloader];
-    
-    [manager downloadImageWithURL:[NSURL URLWithString:url] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+    if ([[SDImageCache sharedImageCache] diskImageExistsWithKey:url]==NO) {
+        __weak typeof(self) weakSelf=self;
+        SDWebImageDownloader *manager = [SDWebImageDownloader sharedDownloader];
         
-    } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
-        if(finished)
-        {
-            self.finishImageNum++;
-        
-            if (self.finishImageNum==self.apperImageNum) {
+        [manager downloadImageWithURL:[NSURL URLWithString:url] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+            
+        } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+            if(finished)
+            {
+                self.finishImageNum++;
+                
+                if (self.finishImageNum==self.apperImageNum) {
+                    
+                }
+                
+                [[SDWebImageManager sharedManager] saveImageToCache:image forURL:[NSURL URLWithString:url]];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    
+                    [weakSelf setImageText:image withRange:range appenReturn:NO];
+                });
+            }
+            else
+            {
                 
             }
-          
-            [[SDWebImageManager sharedManager] saveImageToCache:image forURL:[NSURL URLWithString:url]];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                
-                [weakSelf setImageText:image withRange:range appenReturn:NO];
-            });
-            
-            
-            
-        }
-        else
-        {
-           
-        }
-    }];
+        }];
+    }
+    else
+    {
+        UIImage * image=[[SDImageCache sharedImageCache] imageFromDiskCacheForKey:url];
+        [self setImageText:image withRange:range appenReturn:NO];
+    }
+   
     
 }
 
+# pragma mark cacheRichText
 
 @end

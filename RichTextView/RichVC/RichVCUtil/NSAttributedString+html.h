@@ -14,13 +14,18 @@
  *
  *  @return 普通字符串 html
  */
--(NSString *)toHtmlString;
+ - (NSString *)toHtmlString;
+
+@end
+
+
+@interface NSString (html)
+
 /**
  *  html转化为属性字符串，可直接显示在textview
  *
- *  @param content 内容，网页
- *
  *  @return 属性字符串
  */
-+(NSAttributedString *)toAttributedString:(NSString *)html;
+ - (NSAttributedString *)toAttributedString;
+
 @end
