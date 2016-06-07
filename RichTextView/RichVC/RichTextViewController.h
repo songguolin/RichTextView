@@ -42,20 +42,14 @@ IB_DESIGNABLE
 @property (weak, nonatomic) IBOutlet UIButton *boldBtn;
 @property (weak, nonatomic) IBOutlet UIButton *imageBtn;
 
-
+//初始化页面
++(instancetype)ViewController;
 //提示字
 @property (nonatomic,copy) IBInspectable NSString * placeholderText;
 //文本类型
 @property (nonatomic,assign) RichTextType textType;
-//缓存数据，加载速度更快，不受网络影响
-@property (nonatomic,assign) BOOL cacheRichText;
-
-
+//完成
 @property (nonatomic,copy) inputFinished finished;
-
-//初始化页面
-+(instancetype)ViewController;
-
-////编辑富文本，设置内容
+//编辑富文本，设置内容
 @property (nonatomic,strong) id content;
 @end

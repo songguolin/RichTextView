@@ -14,7 +14,7 @@
 
 
 
-
+//-----------------------生成网页之后的二次编辑还需要完善－－－－－
 
 #import "ViewController2.h"
 #import "RichTextViewController.h"
@@ -70,15 +70,38 @@
     //上传图片
     
     
+    
+    
+//    //比如这是服务器返回的数据
+//   /*
+//    
+//    url="http://photocdn.sohu.com/20160426/Img446187083.jpg",
+//    W=320,
+//    H=390,
+//    */
+//    //把图片地址传入
+//    NSMutableArray * urlArr=[NSMutableArray array];
+//    //模拟图片上传，返回每个图片的地址和大小
+//    for (int i=0; i<imageArr.count; i++) {
+//        PictureModel * model=[[PictureModel alloc]init];
+//        model.imageurl=@"http://photocdn.sohu.com/20160426/Img446187083.jpg";
+//        [urlArr addObject:model];
+//    }
+    
+    
+    //比如这是服务器返回的数据
+    NSArray * urlarr=@[@"<img src=\"http://pic32.nipic.com/20130829/12906030_124355855000_2.png\" w=\"240\" h=\"321\"/>",
+                      
+                       ];
+    
     //把图片地址传入
     NSMutableArray * urlArr=[NSMutableArray array];
     //模拟图片上传，返回每个图片的地址和大小
     for (int i=0; i<imageArr.count; i++) {
-        PictureModel * model=[[PictureModel alloc]init];
-        model.imageurl=@"http://photocdn.sohu.com/20160426/Img446187083.jpg";
-        [urlArr addObject:model];
+       
+        [urlArr addObject:urlarr[0]];
     }
-    
+
     
     
     //获取到网页

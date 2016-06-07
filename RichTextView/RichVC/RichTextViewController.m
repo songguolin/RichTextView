@@ -56,7 +56,7 @@
 -(void)CommomInit
 {
     
-    self.cacheRichText=YES;
+   
     self.textView.delegate=self;
     //显示链接，电话
     self.textView.dataDetectorTypes = UIDataDetectorTypeAll;
@@ -312,6 +312,9 @@
 
 
     if (self.textType==RichTextType_HtmlString) {
+        if (_finished!=nil) {
+            _finished(_textView.attributedText,[_textView.attributedText getImgaeArray]);
+        }
         if ([self.RTDelegate respondsToSelector:@selector(uploadImageArray:withCompletion:)]) {
             //实现上传图片的代理，用url替换图片标识
             
@@ -586,11 +589,19 @@
 
     NSString * newContent=@"";
     for (int i=0; i<strArr.count; i++) {
-        PictureModel * picture=nil;
+        
         NSString * imgTag=@"";
         if (i<picArr.count) {
-            picture=[picArr objectAtIndex:i];
-            imgTag=[NSString stringWithFormat:@"<img src=\"%@\" w=\"%lu\" h=\"%lu\"/>",picture.imageurl,(unsigned long)picture.width,(unsigned long)picture.height];
+            
+          PictureModel *  picture=[picArr objectAtIndex:i];
+            if ([picture isKindOfClass:[PictureModel class]]) {
+                imgTag=[NSString stringWithFormat:@"<img src=\"%@\" w=\"%lu\" h=\"%lu\"/>",picture.imageurl,(unsigned long)picture.width,(unsigned long)picture.height];
+            }
+            else if([picture isKindOfClass:[NSString class]]){
+                imgTag=picArr[i];
+            }
+            
+
         }
 
         
@@ -665,6 +676,9 @@
             if ([content isKindOfClass:[NSString class]]) {
                 NSString * textStr=(NSString *)content;
                 _textView.attributedText=[textStr toAttributedString];
+                if (_textView.attributedText.length>0) {
+                    self.placeholderLabel.hidden=YES;
+                }
             }
             else
             {
@@ -871,6 +885,5 @@
     
 }
 
-# pragma mark cacheRichText
 
 @end
