@@ -11,14 +11,24 @@
 @implementation NSAttributedString (html)
 -(NSString *)toHtmlString
 {
-    NSDictionary * exportParams=@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType};
-    NSData * htmlData=[self dataFromRange:NSMakeRange(0, self.length) documentAttributes:exportParams error:nil];
+//    NSDictionary * exportParams=@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType};
+//    NSData * htmlData=[self dataFromRange:NSMakeRange(0, self.length) documentAttributes:exportParams error:nil];
+//    
+//    
+//    NSString * html=[[NSString alloc]initWithData:htmlData encoding:NSUTF8StringEncoding];
+//    
+//    return html;
     
     
-    NSString * html=[[NSString alloc]initWithData:htmlData encoding:NSUTF8StringEncoding];
+    NSString *htmlString;
+    NSDictionary *exportParams = @{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
+                                   NSCharacterEncodingDocumentAttribute:[NSNumber numberWithInt:NSUTF8StringEncoding]};
     
-    return html;
+    NSData *htmlData = [self dataFromRange:NSMakeRange(0, self.length) documentAttributes:exportParams error:nil];
+    htmlString = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
+    return htmlString;
 }
+
 
 
 @end

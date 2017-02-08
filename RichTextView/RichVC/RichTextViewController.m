@@ -56,11 +56,12 @@
 -(void)CommomInit
 {
     
-   
+    
     self.textView.delegate=self;
     //显示链接，电话
     self.textView.dataDetectorTypes = UIDataDetectorTypeAll;
     self.font=DefaultFont;
+    self.textView.font=[UIFont systemFontOfSize:self.font];
     self.fontColor=[UIColor blackColor];
     self.location=0;
     self.isBold=NO;
@@ -76,12 +77,12 @@
         self.fontBtn.hidden=YES;
         self.colorBtn.hidden=YES;
         self.boldBtn.hidden=YES;
-
+        
     }
     //Init text font
-
+    
     [self resetTextStyle];
-
+    
     //Add keyboard notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardNotification:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardNotification:) name:UIKeyboardWillShowNotification object:nil];
@@ -137,7 +138,7 @@
     if (self.textView.textStorage.length>0) {
         self.placeholderLabel.hidden=YES;
     }
-   
+    
     
 }
 //设置样式
@@ -174,14 +175,14 @@
     
     NSAttributedString * replaceStr=[[NSAttributedString alloc] initWithString:self.newstr attributes:attributes];
     [self.locationStr replaceCharactersInRange:self.newRange withAttributedString:replaceStr];
-   
+    
     _textView.attributedText =self.locationStr;
     
     //这里需要把光标的位置重新设定
     self.textView.selectedRange=NSMakeRange(self.newRange.location+self.newRange.length, 0);
     
- 
-   
+    
+    
 }
 #pragma mark textViewDelegate
 /**
@@ -210,10 +211,10 @@
 }
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-   
+    
     if (range.length == 1)     // 回删
     {
-       
+        
         return YES;
     }
     else
@@ -226,7 +227,7 @@
             return NO;
         }
     }
-
+    
     
     return YES;
 }
@@ -258,7 +259,7 @@
     }
 # warning  如果出现输入问题，检查这里
     bool isChinese;//判断当前输入法是否是中文
-
+    
     if ([[[textView textInputMode] primaryLanguage]  isEqualToString: @"en-US"]) {
         isChinese = false;
     }
@@ -273,7 +274,7 @@
         UITextPosition *position = [ self.textView positionFromPosition:selectedRange.start offset:0];
         // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
         if (!position) {
-//            NSLog(@"汉字");
+            //            NSLog(@"汉字");
             [self setStyle];
             if ( str.length>=MaxLength) {
                 NSString *strNew = [NSString stringWithString:str];
@@ -282,7 +283,7 @@
         }
         else
         {
-//            NSLog(@"没有转化--%@",str);
+            //            NSLog(@"没有转化--%@",str);
             if ([str length]>=MaxLength+10) {
                 NSString *strNew = [NSString stringWithString:str];
                 [ self.textView setText:[strNew substringToIndex:MaxLength+10]];
@@ -290,7 +291,7 @@
             
         }
     }else{
-//        NSLog(@"英文");
+        //        NSLog(@"英文");
         
         [self setStyle];
         if ([str length]>=MaxLength) {
@@ -309,8 +310,8 @@
 #pragma mark - Action 自定义
 //完成
 - (IBAction)finishClick:(UIButton *)sender {
-
-
+    
+    
     if (self.textType==RichTextType_HtmlString) {
         if (_finished!=nil) {
             _finished(_textView.attributedText,[_textView.attributedText getImgaeArray]);
@@ -321,16 +322,16 @@
             __weak typeof(self) weakself=self;
             
             [self.RTDelegate uploadImageArray:[_textView.attributedText getImgaeArray] withCompletion:^NSString *(NSArray *urlArray) {
-                 return  [weakself replacetagWithImageArray:urlArray];
+                return  [weakself replacetagWithImageArray:urlArray];
             }];
         }
     }
     else
     {
-
+        
         //这个是返回数组，每个数组装有不同设置的字符串
         if (self.finished!=nil) {
-
+            
             if (self.textType==RichTextType_AttributedString) {
                 self.finished([_textView.attributedText getArrayWithAttributed],[_textView.attributedText getImgaeArray]);
             }
@@ -342,7 +343,7 @@
             
             
         }
- 
+        
     }
     
 }
@@ -366,7 +367,7 @@
     
     //设置字的设置
     [self setInitLocation];
- 
+    
 }
 //加粗
 - (IBAction)boldClick:(UIButton *)sender {
@@ -406,7 +407,7 @@
 - (IBAction)imageClick:(UIButton *)sender {
     [self.view endEditing:YES];
     
-
+    
     __weak typeof(self) weakSelf=self;
     UIAlertController * alertVC=[UIAlertController alertControllerWithTitle:@"选择照片" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     [alertVC addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -415,7 +416,7 @@
     [alertVC addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
     }]];
-
+    
     [self presentViewController:alertVC animated:YES completion:nil];
     
     
@@ -440,9 +441,9 @@
 #pragma mark - image picker delegte
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-
-
-
+    
+    
+    
     [picker dismissViewControllerAnimated:YES completion:^{}];
     
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
@@ -471,7 +472,7 @@
 -(void)setImageText:(UIImage *)img withRange:(NSRange)range appenReturn:(BOOL)appen
 {
     
- 
+    
     
     
     UIImage * image=img;
@@ -481,7 +482,7 @@
         return;
     }
     
-   
+    
     if (![image isKindOfClass:[UIImage class]])           // UIImage资源
     {
         
@@ -503,8 +504,8 @@
     
     //Set image size
     imageTextAttachment.imageSize = CGSizeMake(IMAGE_MAX_SIZE, ImgeHeight);
-
-
+    
+    
     if (appen) {
         //Insert image image
         [_textView.textStorage insertAttributedString:[NSAttributedString attributedStringWithAttachment:imageTextAttachment]
@@ -513,13 +514,13 @@
     else
     {
         if (_textView.textStorage.length>0) {
-           
+            
             //Insert image image
             [_textView.textStorage replaceCharactersInRange:range withAttributedString:[NSAttributedString attributedStringWithAttachment:imageTextAttachment]];
         }
-
+        
     }
-
+    
     
     //Move selection location
     _textView.selectedRange = NSMakeRange(range.location + 1, range.length);
@@ -528,9 +529,9 @@
     [self setInitLocation];
     if(appen)
     {
-           [self appenReturn]; 
+        [self appenReturn];
     }
-
+    
 }
 
 
@@ -567,43 +568,43 @@
 //这里就开始上传图片，拼接图片地址
 -(NSString *)replacetagWithImageArray:(NSArray *)picArr
 {
-
+    
     NSMutableAttributedString * contentStr=[[NSMutableAttributedString alloc]initWithAttributedString:_textView.attributedText];
-
+    
     [contentStr enumerateAttribute:NSAttachmentAttributeName inRange:NSMakeRange(0, contentStr.length)
                            options:0
                         usingBlock:^(id value, NSRange range, BOOL *stop) {
                             if (value && [value isKindOfClass:[ImageTextAttachment class]]) {
-
+                                
                                 [contentStr replaceCharactersInRange:range withString:RICHTEXT_IMAGE];
-
+                                
                             }
                         }];
     
-
+    
     NSMutableString * mutableStr=[[NSMutableString alloc]initWithString:[contentStr toHtmlString]];
     
     //这里是把字符串分割成数组，
     NSArray * strArr=[mutableStr  componentsSeparatedByString:RICHTEXT_IMAGE];
-
-
+    
+    
     NSString * newContent=@"";
     for (int i=0; i<strArr.count; i++) {
         
         NSString * imgTag=@"";
         if (i<picArr.count) {
             
-          PictureModel *  picture=[picArr objectAtIndex:i];
+            PictureModel *  picture=[picArr objectAtIndex:i];
             if ([picture isKindOfClass:[PictureModel class]]) {
-                imgTag=[NSString stringWithFormat:@"<img src=\"%@\" w=\"%lu\" h=\"%lu\"/>",picture.imageurl,(unsigned long)picture.width,(unsigned long)picture.height];
+                imgTag=[NSString stringWithFormat:@"<img src=\"%@\" width=\"%lu\" height=\"%lu\"/>",picture.imageurl,(unsigned long)picture.width,(unsigned long)picture.height];
             }
             else if([picture isKindOfClass:[NSString class]]){
                 imgTag=picArr[i];
             }
             
-
+            
         }
-
+        
         
         
         //因为cutstr 可能是null
@@ -613,7 +614,7 @@
     }
     
     return newContent;
-
+    
 }
 
 #pragma mark setter
@@ -644,8 +645,8 @@
                             
                             PictureModel * model=[[PictureModel alloc]init];
                             model.imageurl=dict[@"src"];
-                            model.width=[dict[@"w"] floatValue];;
-                            model.height=[dict[@"h"] floatValue];
+                            model.width=[dict[@"width"] floatValue];;
+                            model.height=[dict[@"height"] floatValue];
                             [modelArr addObject:model];
                         }
                     }
@@ -675,9 +676,39 @@
         {
             if ([content isKindOfClass:[NSString class]]) {
                 NSString * textStr=(NSString *)content;
-                _textView.attributedText=[textStr toAttributedString];
+                
+                //先赋值富文本-
+                self.textView.attributedText =[[textStr RXToStringWithString:@"<br />"] toAttributedString];
+                [self setInitLocation];
                 if (_textView.attributedText.length>0) {
                     self.placeholderLabel.hidden=YES;
+                }
+                //开始加载图片
+                textStr=[textStr RXToString];
+                NSAttributedString * attStr=[textStr toAttributedString];
+
+                
+                if (self.content!=nil) {
+                    
+                    NSMutableArray * modelArr=[NSMutableArray array];
+                    NSArray * imageOfWH=[content RXToArray];
+                    
+                    if (modelArr!=nil) {
+                        [modelArr removeAllObjects];
+                    }
+                    //获取字符串中的图片
+                    for (NSDictionary * dict in imageOfWH) {
+                        if ([dict isKindOfClass:[NSDictionary class]]) {
+                            
+                            PictureModel * model=[[PictureModel alloc]init];
+                            model.imageurl=dict[@"src"];
+                            model.width=[dict[@"width"] floatValue];;
+                            model.height=[dict[@"height"] floatValue];
+                            [modelArr addObject:model];
+                        }
+                    }
+                    
+                    [self setAttributedContentStr:attStr withImageArr:modelArr];
                 }
             }
             else
@@ -692,6 +723,49 @@
     }
     
     
+    
+}
+-(void)setAttributedContentStr:(NSAttributedString *)contentStr withImageArr:(NSArray *)imageArr
+{
+ 
+    
+    if (imageArr.count==0) {
+        return;
+    }
+    
+    self.apperImageNum=imageArr.count;
+    self.finishImageNum=0;
+    
+    
+    //2.这里是把字符串分割成数组，
+    NSArray * strArr=[contentStr.string  componentsSeparatedByString:RICHTEXT_IMAGE];
+    NSUInteger locLength=0;
+    //替换带有图片标签的,设置图片
+    for (int i=0; i<imageArr.count; i++) {
+        
+        NSString * locStr=[strArr objectAtIndex:i];
+        
+        locLength+=locStr.length;
+        id image=[imageArr objectAtIndex:i];
+        if ([image isKindOfClass:[UIImage class]]) {
+            
+            [self setImageText:image withRange:NSMakeRange(locLength+i, 1) appenReturn:NO];
+        }
+        else if([image isKindOfClass:[PictureModel class]])
+        {
+            PictureModel * model=(PictureModel *)image;
+            [self downLoadImageWithUrl:model.imageurl                                                                                                                                                    WithRange:NSMakeRange(locLength+i, 1)];
+        }
+        else if([image isKindOfClass:[NSString class]])
+        {
+            [self downLoadImageWithUrl:(NSString *)image                                                                                                                                                    WithRange:NSMakeRange(locLength+i, 1)];
+        }
+        
+    }
+    
+    //设置光标到末尾
+    self.textView.selectedRange=NSMakeRange(self.textView.attributedText.length, 0);
+    
 
 }
 -(void)setContentStr:(NSString *)contentStr withImageArr:(NSArray *)imageArr
@@ -703,7 +777,7 @@
     }
     self.placeholderLabel.hidden=YES;
     
-
+    
     //1.显示文字内容
     NSMutableString * mutableStr=[[NSMutableString alloc]initWithString:contentStr];
     
@@ -734,10 +808,12 @@
     for (int i=0; i<imageArr.count; i++) {
         
         NSString * locStr=[strArr objectAtIndex:i];
+        
+        
         locLength+=locStr.length;
         id image=[imageArr objectAtIndex:i];
         if ([image isKindOfClass:[UIImage class]]) {
-         
+            
             [self setImageText:image withRange:NSMakeRange(locLength+i, 1) appenReturn:NO];
         }
         else if([image isKindOfClass:[PictureModel class]])
@@ -749,7 +825,7 @@
         {
             [self downLoadImageWithUrl:(NSString *)image                                                                                                                                                    WithRange:NSMakeRange(locLength+i, 1)];
         }
-
+        
     }
     
     //设置光标到末尾
@@ -769,14 +845,14 @@
     
     //将要下载的图片数目
     self.apperImageNum=0;
-
+    
     NSMutableArray * imageArr=[NSMutableArray array];
     
     NSMutableAttributedString * mutableAttributedStr=[[NSMutableAttributedString alloc]init];
     for (NSDictionary * dict in content) {
         if (dict[@"image"]!=nil) {
             NSMutableDictionary * imageMutableDict=[NSMutableDictionary dictionaryWithDictionary:[dict[@"image"] RXImageUrl]];
-
+            
             [imageMutableDict setObject:[NSNumber numberWithInteger:mutableAttributedStr.length] forKey:@"locLenght"];
             [imageArr addObject:imageMutableDict];
             self.apperImageNum++;
@@ -794,13 +870,13 @@
             
             //Set image size
             imageTextAttachment.imageSize = CGSizeMake(IMAGE_MAX_SIZE, ImgeHeight);
- 
-                //Insert image image
-                [mutableAttributedStr insertAttributedString:[NSAttributedString attributedStringWithAttachment:imageTextAttachment]
-                                                      atIndex:mutableAttributedStr.length];
+            
+            //Insert image image
+            [mutableAttributedStr insertAttributedString:[NSAttributedString attributedStringWithAttachment:imageTextAttachment]
+                                                 atIndex:mutableAttributedStr.length];
             continue;
         }
-
+        
         NSString * plainStr=dict[@"title"];
         NSMutableAttributedString * attrubuteStr=[[NSMutableAttributedString alloc]initWithString:plainStr];
         //设置初始内容
@@ -817,30 +893,30 @@
             NSDictionary *attributes =[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:[dict[@"font"] floatValue]],NSFontAttributeName,[UIColor colorWithHexString:dict[@"color"]],NSForegroundColorAttributeName,paragraphStyle,NSParagraphStyleAttributeName,nil ];
             [attrubuteStr addAttributes:attributes range:NSMakeRange(0, attrubuteStr.length)];
         }
-
-
+        
+        
         [mutableAttributedStr appendAttributedString:attrubuteStr];
     }
     
     self.textView.attributedText =mutableAttributedStr;
-
-
+    
+    
     //没有图片需要下载
     if (self.apperImageNum==0) {
         return;
     }
-
-   
+    
+    
     self.finishImageNum=0;
-
+    
     NSUInteger locLength=0;
     //替换带有图片标签的,设置图片
     for (int i=0; i<imageArr.count; i++) {
-       NSDictionary * imageDict=[imageArr objectAtIndex:i];
-       locLength=[imageDict[@"locLenght"]integerValue] ;
+        NSDictionary * imageDict=[imageArr objectAtIndex:i];
+        locLength=[imageDict[@"locLenght"]integerValue] ;
         //只取第一个
         [self downLoadImageWithUrl:(NSString *)imageDict[@"src"]                                                                                                                                                    WithRange:NSMakeRange(locLength, 1)];
-
+        
     }
     //设置光标到末尾
     self.textView.selectedRange=NSMakeRange(self.textView.attributedText.length, 0);
@@ -881,7 +957,7 @@
         UIImage * image=[[SDImageCache sharedImageCache] imageFromDiskCacheForKey:url];
         [self setImageText:image withRange:range appenReturn:NO];
     }
-   
+    
     
 }
 

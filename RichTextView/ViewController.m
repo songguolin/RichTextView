@@ -79,12 +79,12 @@
     
     
     //比如这是服务器返回的数据
-    NSArray * urlarr=@[@"<img src=\"http://pic32.nipic.com/20130829/12906030_124355855000_2.png\" w=\"240\" h=\"321\"/>",
-                       @"<img src=\"http://pic55.nipic.com/file/20141208/19462408_171130083000_2.jpg\" w=\"240\" h=\"321\"/>",
-                       @"<img src=\"http://pic36.nipic.com/20131217/6704106_233034463381_2.jpg\" w=\"240\" h=\"321\"/>",
-                       @"<img src=\"http://img05.tooopen.com/images/20140604/sy_62331342149.jpg\" w=\"240\" h=\"321\"/>",
-                       @"<img src=\"http://img05.tooopen.com/images/20150531/tooopen_sy_127457023651.jpg\" w=\"240\" h=\"321\"/>",
-                       @"<img src=\" http://pic44.nipic.com/20140721/11624852_001107119409_2.jpg\" w=\"240\" h=\"321\"/>"
+    NSArray * urlarr=@[@"<img src=\"http://pic32.nipic.com/20130829/12906030_124355855000_2.png\" width=\"240\" height=\"321\"/>",
+                       @"<img src=\"http://pic55.nipic.com/file/20141208/19462408_171130083000_2.jpg\" width=\"240\" height=\"321\"/>",
+                       @"<img src=\"http://pic36.nipic.com/20131217/6704106_233034463381_2.jpg\" width=\"240\" height=\"321\"/>",
+                       @"<img src=\"http://img05.tooopen.com/images/20140604/sy_62331342149.jpg\" width=\"240\" height=\"321\"/>",
+                       @"<img src=\"http://img05.tooopen.com/images/20150531/tooopen_sy_127457023651.jpg\" width=\"240\" height=\"321\"/>",
+                       @"<img src=\" http://pic44.nipic.com/20140721/11624852_001107119409_2.jpg\" width=\"240\" height=\"321\"/>"
                       ];
    
 

@@ -34,8 +34,8 @@
         if (imageStr!=nil) {
            _picture=[[PictureModel alloc]init];
             _picture.imageurl=imageDict[@"src"];
-            _picture.width=[imageDict[@"w"] floatValue];
-            _picture.height=[imageDict[@"h"] floatValue];
+            _picture.width=[imageDict[@"width"] floatValue];
+            _picture.height=[imageDict[@"height"] floatValue];
             
 
         }

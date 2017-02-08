@@ -90,7 +90,7 @@
     
     
     //比如这是服务器返回的数据
-    NSArray * urlarr=@[@"<img src=\"http://pic32.nipic.com/20130829/12906030_124355855000_2.png\" w=\"240\" h=\"321\"/>",
+    NSArray * urlarr=@[@"<img src=\"http://pic32.nipic.com/20130829/12906030_124355855000_2.png\" width=\"240\" height=\"321\"/>",
                       
                        ];
     
@@ -108,9 +108,13 @@
    jsonString=completion(urlArr);
     
     NSLog(@"jsonString--%@",jsonString);
+    
+    [self.webView sizeToFit];
     //然后上传网页
     //这个显示就看大家怎么处理了
     [self.webView loadHTMLString:jsonString baseURL:nil];
+    
+    
     
 }
 

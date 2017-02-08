@@ -37,4 +37,12 @@
  *  @return NSArray
  */
 -(NSArray *)RXToStringArray;
+
+
+/**
+ *  富文本图片标识 替换正则
+ *
+ *  @return NSString
+ */
+-(NSString *)RXToStringWithString:(NSString *)string;
 @end

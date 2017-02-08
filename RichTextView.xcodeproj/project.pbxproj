@@ -568,6 +568,7 @@
 				TargetAttributes = {
 					DE70FDD61C3E2FD900540EE7 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 95TT272Q62;
 					};
 					DE70FDEF1C3E2FD900540EE7 = {
 						CreatedOnToolsVersion = 7.2;
@@ -820,10 +821,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 95TT272Q62;
 				GCC_PREFIX_HEADER = RichTextView/PrefixHeader.pch;
 				INFOPLIST_FILE = RichTextView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.innos.RichTextView;
+				PRODUCT_BUNDLE_IDENTIFIER = com.song.push;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -833,10 +835,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 95TT272Q62;
 				GCC_PREFIX_HEADER = RichTextView/PrefixHeader.pch;
 				INFOPLIST_FILE = RichTextView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.innos.RichTextView;
+				PRODUCT_BUNDLE_IDENTIFIER = com.song.push;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

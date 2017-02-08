@@ -12,7 +12,7 @@
 //输出正则里面的内容//输出正则里面的内容
 -(NSDictionary *)RXImageUrl
 {
-    NSString *pattern = @"<img src=\"([^\\s]*)\" w=\"([^\\s]*)\" h=\"([^\\s]*)\"\\s*/>";
+    NSString *pattern = @"<img src=\"([^\\s]*)\" width=\"([^\\s]*)\" height=\"([^\\s]*)\"\\s*/>";
     NSRegularExpression *expression = [NSRegularExpression regularExpressionWithPattern:pattern
                                                                                 options:0
                                                                                   error:NULL];
@@ -28,8 +28,8 @@
         NSString* value3 = [self substringWithRange:[textCheckingResult rangeAtIndex:3]];
         
         result[@"src"] = value1;
-        result[@"w"] = value2;
-        result[@"h"] = value3;
+        result[@"width"] = value2;
+        result[@"height"] = value3;
         [resultArr addObject:result];
         
     }
@@ -40,7 +40,7 @@
 //输出正则里面的内容
 -(NSArray *)RXToArray
 {
-    NSString *pattern = @"<img src=\"([^\\s]*)\" w=\"([^\\s]*)\" h=\"([^\\s]*)\"\\s*/>";
+    NSString *pattern = @"<img src=\"([^\\s]*)\" width=\"([^\\s]*)\" height=\"([^\\s]*)\"\\s*/>";
     NSRegularExpression *expression = [NSRegularExpression regularExpressionWithPattern:pattern
                                                                                 options:0
                                                                                   error:NULL];
@@ -56,8 +56,8 @@
         NSString* value3 = [self substringWithRange:[textCheckingResult rangeAtIndex:3]];
         
         result[@"src"] = value1;
-        result[@"w"] = value2;
-        result[@"h"] = value3;
+        result[@"width"] = value2;
+        result[@"height"] = value3;
         [resultArr addObject:result];
         
     }
@@ -69,7 +69,7 @@
 -(NSString *)RXToString
 {
     
-    NSString *pattern = @"<img src=\"([^\\s]*)\" w=\"([^\\s]*)\" h=\"([^\\s]*)\"\\s*/>";
+    NSString *pattern = @"<img src=\"([^\\s]*)\" width=\"([^\\s]*)\" height=\"([^\\s]*)\"\\s*/>";
     
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:nil];
     
@@ -82,10 +82,24 @@
     return rxString;
     
 }
+-(NSString *)RXToStringWithString:(NSString *)string
+{
+    NSString *pattern = @"<img src=\"([^\\s]*)\" width=\"([^\\s]*)\" height=\"([^\\s]*)\"\\s*/>";
+    
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:nil];
+    
+    
+    
+    NSString *rxString = [regex stringByReplacingMatchesInString:self
+                                                         options:0
+                                                           range:NSMakeRange(0, [self length])
+                                                    withTemplate:string];
+    return rxString;
+}
 //分隔成字符串数组
 -(NSArray *)RXToStringArray
 {
-    NSString *pattern = @"<img src=\"([^\\s]*)\" w=\"([^\\s]*)\" h=\"([^\\s]*)\"\\s*/>";
+    NSString *pattern = @"<img src=\"([^\\s]*)\" width=\"([^\\s]*)\" height=\"([^\\s]*)\"\\s*/>";
     
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:nil];
     

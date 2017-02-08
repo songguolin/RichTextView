@@ -37,8 +37,8 @@
                 
                 PictureModel * model=[[PictureModel alloc]init];
                 model.imageurl=dict[@"src"];
-                model.width=[dict[@"w"] floatValue];;
-                model.height=[dict[@"h"] floatValue];
+                model.width=[dict[@"width"] floatValue];;
+                model.height=[dict[@"height"] floatValue];
                 [self.imageArr addObject:model];
                 
                 
