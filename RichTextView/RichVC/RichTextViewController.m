@@ -28,7 +28,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *placeholderLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraint;
 
-
+@property (nonatomic,assign) NSRange pickerRange;  //记录选择图片的位置
 //设置
 @property (nonatomic,assign) NSRange newRange;     //记录最新内容的range
 @property (nonatomic,strong) NSString * newstr;    //记录最新内容的字符串
@@ -407,7 +407,7 @@
 - (IBAction)imageClick:(UIButton *)sender {
     [self.view endEditing:YES];
     
-    
+    self.pickerRange=self.textView.selectedRange;
     __weak typeof(self) weakSelf=self;
     UIAlertController * alertVC=[UIAlertController alertControllerWithTitle:@"选择照片" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     [alertVC addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -459,13 +459,13 @@
     //    // 保存图片至本地，方法见下文
     //    NSLog(@"img = %@",image);
     
-    if (self.textView.textStorage.length>0) {
-        [self appenReturn];
-    }
+
+   
     //图片添加后 自动换行
-    [self setImageText:image withRange:self.textView.selectedRange appenReturn:YES];
+    [self setImageText:image withRange:self.pickerRange appenReturn:YES];
+
+   
     
-    [self.textView becomeFirstResponder];
     
 }
 //设置图片
@@ -507,15 +507,17 @@
     
     
     if (appen) {
-        //Insert image image
-        [_textView.textStorage insertAttributedString:[NSAttributedString attributedStringWithAttachment:imageTextAttachment]
+        NSAttributedString * imageAtt=[self appenReturn:[NSAttributedString attributedStringWithAttachment:imageTextAttachment]];
+        //Insert image image-
+        [_textView.textStorage insertAttributedString:imageAtt
                                               atIndex:range.location];
     }
     else
     {
         if (_textView.textStorage.length>0) {
             
-            //Insert image image
+            
+            //replace image image-二次编辑
             [_textView.textStorage replaceCharactersInRange:range withAttributedString:[NSAttributedString attributedStringWithAttachment:imageTextAttachment]];
         }
         
@@ -527,22 +529,20 @@
     
     //设置locationStr的设置
     [self setInitLocation];
-    if(appen)
-    {
-        [self appenReturn];
-    }
+
     
 }
 
 
-
--(void)appenReturn
+#pragma mark - 添加图片的时候前后自动换行
+-(NSAttributedString *)appenReturn:(NSAttributedString*)imageStr
 {
     NSAttributedString * returnStr=[[NSAttributedString alloc]initWithString:@"\n"];
-    NSMutableAttributedString * att=[[NSMutableAttributedString alloc]initWithAttributedString:_textView.attributedText];
+    NSMutableAttributedString * att=[[NSMutableAttributedString alloc]initWithAttributedString:imageStr];
     [att appendAttributedString:returnStr];
+    [att insertAttributedString:returnStr atIndex:0];
     
-    _textView.attributedText=att;
+    return att;
 }
 
 #pragma mark - Keyboard notification
